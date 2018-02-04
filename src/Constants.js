@@ -3,13 +3,13 @@ export const BASE_URL = "https://api.piggy.co.in/v2/mf/search/";
 export const TOKEN = "Token a41d2b39e3b47412504509bb5a1b66498fb1f43a";
 
 //// RISKS
-export const RISKS = "risks";
+export const RISKS = { name: "Risks", value: "risks" };
 
-const LOW = "low";
-const MODERATELY_LOW = "moderately_low";
-const MODERATE = "moderate";
-const MODERATELY_HIGH = "moderately_high";
-const HIGH = "high";
+const LOW = { name: "Low", value: "low" };
+const MODERATELY_LOW = { name: "Moderately Low", value: "moderately_low" };
+const MODERATE = { name: "Moderate", value: "moderate" };
+const MODERATELY_HIGH = { name: "Moderately High", value: "moderately_high" };
+const HIGH = { name: "High", value: "high" };
 
 export const RISKS_PARAMS = {
   LOW,
@@ -20,12 +20,12 @@ export const RISKS_PARAMS = {
 };
 
 // CATEGORIES
-export const CATEGORIES = "categories";
+export const CATEGORIES = { name: "Categories", value: "categories" };
 
-const COMMODITIES = "commodities";
-const DEBT = "debt";
-const EQUITY = "equity";
-const HYBRID = "hybrid";
+export const COMMODITIES = { name: "Commodities", value: "commodities" };
+export const DEBT = { name: "Debt", value: "debt" };
+export const EQUITY = { name: "Equity", value: "equity" };
+export const HYBRID = { name: "Hybrid", value: "hybrid" };
 
 export const CATEGORY_PARAMS = {
   COMMODITIES,
@@ -35,51 +35,10 @@ export const CATEGORY_PARAMS = {
 };
 
 // SUB CATEGORIES
-export const SUB_CATEGORIES = "sub_categories";
-
-export const SUB_CATEGORY_PARAMS = {
-  COMMODITIES: COMMODITIES_PARAMS,
-  DEBT: DEPT_PARAMS,
-  EQUITY: EQUITY_PARAMS,
-  HYBRID: HYBRID_PARAMS
+export const SUB_CATEGORIES = {
+  name: "Sub Categories",
+  value: "sub_categories"
 };
-
-// MINIMUM_INVESTMENTS
-export const MINIMUM_INVESTMENTS = "minimum_investments";
-
-// FUND HOUSE NAMES
-export const AMC = "amc";
-const IDFC_MUTUAL_FUND = "idfc_mutual_fund";
-const KOTAK_MAHINDRA_MUTUAL_FUND = "kotak_mahindra_mutual_fund";
-const BIRLA_SUN_LIFE_MUTUAL_FUND = "birla_sun_life_mutual_fund";
-const DHFL_PRAMERICA_MUTUAL_FUND = "dhfl_pramerica_mutual_fund";
-const HDFC_MUTUAL_FUND = "hdfc_mutual_fund";
-const RELIANCE_MUTUAL_FUND = "reliance_mutual_fund";
-const SBI_MUTUAL_FUND = "sbi_mutual_fund";
-const AXIS_ASSET_MUTUAL_FUND = "axis_asset_mutual_fund";
-const CANARA_ROBECO_MUTUAL_FUND = "canara_robeco_mutual_fund";
-const DSP_BLACKROCK_MUTUAL_FUND = "dsp_blackrock_mutual_fund";
-
-export const AMC_PARAMS = {
-  IDFC_MUTUAL_FUND,
-  KOTAK_MAHINDRA_MUTUAL_FUND,
-  BIRLA_SUN_LIFE_MUTUAL_FUND,
-  DHFL_PRAMERICA_MUTUAL_FUND,
-  HDFC_MUTUAL_FUND,
-  RELIANCE_MUTUAL_FUND,
-  SBI_MUTUAL_FUND,
-  AXIS_ASSET_MUTUAL_FUND,
-  CANARA_ROBECO_MUTUAL_FUND,
-  DSP_BLACKROCK_MUTUAL_FUND
-};
-
-// PLAN TYPE
-export const PLAN_TYPE = "plan_type";
-
-const DIRECT_PLAN = "direct_plan";
-const REGULAR_PLAN = "regular_plan";
-
-export const PLAN_TYPE_PARAMS = { DIRECT_PLAN, REGULAR_PLAN };
 
 //----SUB CATEGORIES----//
 //// COMMODITIES SUB CATEGORIES
@@ -91,7 +50,7 @@ const GOLD = { name: "Gold", value: "gold" };
 
 export const COMMODITIES_PARAMS = { MULTI_COMMODITIES, GOLD };
 
-//// DEPT SUB CATEGORIES
+//// DEBT SUB CATEGORIES
 const CREDIT_OPPORTUNITIES = {
   name: "Credit Opportunities",
   value: "credit_opportunities"
@@ -110,7 +69,7 @@ const SHORT_TERM = { name: "Short Term", value: "short_term" };
 const INCOME = { name: "Income", value: "income" };
 const LIQUID = { name: "Liquid", value: "liquid" };
 
-export const DEPT_PARAMS = {
+export const DEBT_PARAMS = {
   CREDIT_OPPORTUNITIES,
   DYNAMIC_BOND,
   ULTRA_SHORT_TERM,
@@ -189,3 +148,89 @@ export const HYBRID_PARAMS = {
   EQUITY_ORIENTED,
   MIP_AGGRESSIVE
 };
+
+// export const SUB_CATEGORY_PARAMS = {
+//   [COMMODITIES.name]: COMMODITIES_PARAMS,
+//   [DEBT.name]: DEPT_PARAMS,
+//   [EQUITY.name]: EQUITY_PARAMS,
+//   [HYBRID.name]: HYBRID_PARAMS
+// };
+
+// MINIMUM_INVESTMENTS
+export const MINIMUM_INVESTMENTS = {
+  name: "Minimum Investments",
+  value: "minimum_investments"
+};
+
+const HUNDRED = { name: "100", value: 100 };
+const FINE_HUNDRED = { name: "500", value: 500 };
+const THOUSAND = { name: "1000", value: 1000 };
+const MORE_THAN_THOUSAND = { name: "1000+", value: 10000 };
+
+export const MINIMUM_INVESTMENTS_PARAMS = {
+  HUNDRED,
+  FINE_HUNDRED,
+  THOUSAND,
+  MORE_THAN_THOUSAND
+};
+// FUND HOUSE NAMES
+export const AMC = { name: "amc", value: "fund_house_names" };
+
+const IDFC_MUTUAL_FUND = {
+  name: "IDFC Mutual Fund",
+  value: "idfc_mutual_fund"
+};
+const KOTAK_MAHINDRA_MUTUAL_FUND = {
+  name: "Kotak Mahindra Mutual Fund",
+  value: "kotak_mahindra_mutual_fund"
+};
+const BIRLA_SUN_LIFE_MUTUAL_FUND = {
+  name: "Birla Sun Life Mutual Fund",
+  value: "birla_sun_life_mutual_fund"
+};
+const DHFL_PRAMERICA_MUTUAL_FUND = {
+  name: "DHFL Pramerica Mutual Fund",
+  value: "dhfl_pramerica_mutual_fund"
+};
+const HDFC_MUTUAL_FUND = {
+  name: "HDFC Mutual Fund",
+  value: "hdfc_mutual_fund"
+};
+const RELIANCE_MUTUAL_FUND = {
+  name: "Reliance Mutual Fund",
+  value: "reliance_mutual_fund"
+};
+const SBI_MUTUAL_FUND = { name: "sbi Mutual Fund", value: "sbi_mutual_fund" };
+const AXIS_ASSET_MUTUAL_FUND = {
+  name: "Axis Asset Mutual Fund",
+  value: "axis_asset_mutual_fund"
+};
+const CANARA_ROBECO_MUTUAL_FUND = {
+  name: "Canara Robeco Mutual Fund",
+  value: "canara_robeco_mutual_fund"
+};
+const DSP_BLACKROCK_MUTUAL_FUND = {
+  name: "Dsp Blackrock Mutual Fund",
+  value: "dsp_blackrock_mutual_fund"
+};
+
+export const AMC_PARAMS = {
+  IDFC_MUTUAL_FUND,
+  KOTAK_MAHINDRA_MUTUAL_FUND,
+  BIRLA_SUN_LIFE_MUTUAL_FUND,
+  DHFL_PRAMERICA_MUTUAL_FUND,
+  HDFC_MUTUAL_FUND,
+  RELIANCE_MUTUAL_FUND,
+  SBI_MUTUAL_FUND,
+  AXIS_ASSET_MUTUAL_FUND,
+  CANARA_ROBECO_MUTUAL_FUND,
+  DSP_BLACKROCK_MUTUAL_FUND
+};
+
+// PLAN TYPE
+export const PLAN_TYPE = { name: "Plan Type", value: "plan_type" };
+
+const DIRECT_PLAN = { name: "Direct Plan", value: "direct_plan" };
+const REGULAR_PLAN = { name: "Regular Plan", value: "regular_plan" };
+
+export const PLAN_TYPE_PARAMS = { DIRECT_PLAN, REGULAR_PLAN };

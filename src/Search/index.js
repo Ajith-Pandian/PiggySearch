@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity
+} from "react-native";
+import { connect } from "react-redux";
+
 import MinAmtChooser from "../Components/MinAmtChooser";
 import RoundedButton from "../Components/RoundedButton";
 import Category from "./Category";
+
+import { changeFilter } from "../Store/Actions/FillerActions";
+
 const Header = onChangeText => {
   return (
     <View
@@ -33,8 +44,29 @@ const Header = onChangeText => {
     </View>
   );
 };
-export default class SearchPage extends Component {
+
+const Button = ({ text, onPress, style }) => {
+  return (
+    <TouchableOpacity
+      onPress={() => onPress()}
+      style={[
+        {
+          backgroundColor: "blue",
+          margin: 2,
+          width: "98%",
+          alignItems: "center",
+          paddingVertical: 10
+        },
+        style
+      ]}
+    >
+      <Text style={{ color: "white" }}>{text}</Text>
+    </TouchableOpacity>
+  );
+};
+class SearchPage extends Component {
   render() {
+    let { navigation, _changeFilter } = this.props;
     return (
       <View style={styles.container}>
         <Header onChangeText={text => console.log(text)} />
@@ -45,12 +77,28 @@ export default class SearchPage extends Component {
           <MinAmtChooser />
         </View>
         <Category />
+        <Button
+          text={"SEARCH"}
+          style={{ position: "absolute", bottom: 0 }}
+          onPress={() => {
+            navigation.navigate("Filter");
+            _changeFilter();
+          }}
+        />
       </View>
     );
   }
 }
 SearchPage.navigationOptions = { header: null };
 
+const mapStateToProps = ({ FilterReducer }) => {
+  let { filter } = FilterReducer;
+  return { filter };
+};
+const mapDispatchToProps = (dispatch, props) => ({
+  _changeFilter: filters => dispatch(changeFilter(filters))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

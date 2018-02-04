@@ -1,13 +1,14 @@
 import React from "react";
 import { Text, View } from "react-native";
 import StepSlider from "./StepSlider";
+import { PRIMARY } from "../Constants";
 
 const MinAmtChooser = () => {
   return (
     <View
       style={{
         height: 80,
-        backgroundColor: "blue",
+        backgroundColor: PRIMARY,
         marginHorizontal: 10,
         padding: 10
       }}

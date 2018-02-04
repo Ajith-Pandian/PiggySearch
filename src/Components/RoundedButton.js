@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
+
 import StepSlider from "./StepSlider";
+import { PINK, PINK_DARK } from "../Constants";
 
 export default class RoundedButton extends Component {
   state = { isActive: false };
@@ -20,7 +22,7 @@ export default class RoundedButton extends Component {
         style={[
           {
             height: 40,
-            backgroundColor: isActive ? "blue" : "powderblue",
+            backgroundColor: isActive ? PINK : PINK_DARK,
             margin: 5,
             padding: 15,
             borderRadius: 30,

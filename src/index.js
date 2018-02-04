@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Platform, StatusBar, Text, View } from "react-native";
 import { StackNavigator } from "react-navigation";
 import { Provider, connect } from "react-redux";
 
 import Search from "./Search";
 import Filter from "./Filter";
+import { PRIMARY_DARK } from "./Constants";
 
 import store from "./Store";
 
@@ -28,13 +29,13 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
 const StatusBarApp = () => (
   <View style={{ flex: 1 }}>
     <MyStatusBar backgroundColor={PRIMARY_DARK} barStyle="light-content" />
-    <ConnectedApp />
+    <StackApp />
   </View>
 );
 
 const ReduxApp = () => (
   <Provider store={store}>
-    <StackApp />
+    <StatusBarApp />
   </Provider>
 );
 

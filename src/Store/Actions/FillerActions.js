@@ -1,8 +1,8 @@
 import {
   CHANGE_FILTER_STATE,
-  FETCH_RESULTS,
-  FETCH_RESULTS_SUCCESS,
-  FETCH_RESULTS_FAILURE
+  FETCH_RESULT,
+  FETCH_RESULT_SUCCESS,
+  FETCH_RESULT_FAILURE
 } from "../ActionNames";
 //import ApiHelper from "../../ApiHelper";
 
@@ -13,51 +13,26 @@ function _changeFilter(filters) {
   return { type: CHANGE_FILTER_STATE, filters };
 }
 
-export const fetchCase = id => dispatch => {
-  dispatch(_fetchCase());
-  ApiHelper.getCase(id).then(res => {
+export const fetchResult = (term, rows = 50, offset = 0) => dispatch => {
+  dispatch(_fetchResult());
+  ApiHelper.search(id).then(res => {
     if (res && res.success) {
-      dispatch(_fetchCaseSuccess(getCaseFromJson(res.data)));
-      dispatch(fetchHistory(id));
-    } else dispatch(_fetchCaseFailure());
+      dispatch(_fetchResultSuccess(res.data));
+    } else dispatch(_fetchResultFailure());
   });
 };
 
-function _fetchCase() {
+function _fetchResult() {
   return {
-    type: FETCH_CASE
+    type: FETCH_RESULT
   };
 }
-function _fetchCaseSuccess(data) {
-  return { type: FETCH_CASE_SUCCESS, case: data };
+function _fetchResultSuccess(data) {
+  return { type: FETCH_RESULT_SUCCESS, case: data };
 }
 
-function _fetchCaseFailure() {
+function _fetchResultFailure() {
   return {
-    type: FETCH_CASE_FAILURE
-  };
-}
-
-export const fetchHistory = id => dispatch => {
-  dispatch(_fetchHistory());
-  ApiHelper.getHistory(id).then(res => {
-    res && res.success
-      ? dispatch(_fetchHistorySuccess(id, res.data))
-      : dispatch(_fetchHistoryFailure());
-  });
-};
-
-function _fetchHistory() {
-  return {
-    type: FETCH_HISTORY
-  };
-}
-function _fetchHistorySuccess(id, data) {
-  return { type: FETCH_HISTORY_SUCCESS, id, history: data };
-}
-
-function _fetchHistoryFailure() {
-  return {
-    type: FETCH_HISTORY_FAILURE
+    type: FETCH_RESULT_FAILURE
   };
 }

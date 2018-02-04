@@ -12,6 +12,7 @@ import MinAmtChooser from "../Components/MinAmtChooser";
 import RoundedButton from "../Components/RoundedButton";
 import Category from "./Category";
 
+import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
 const Header = onChangeText => {
@@ -24,7 +25,7 @@ const Header = onChangeText => {
         right: 0,
         width: "100%",
         height: 60,
-        backgroundColor: "blue"
+        backgroundColor: PRIMARY
       }}
     >
       <TextInput
@@ -51,7 +52,7 @@ const Button = ({ text, onPress, style }) => {
       onPress={() => onPress()}
       style={[
         {
-          backgroundColor: "blue",
+          backgroundColor: PINK,
           margin: 2,
           width: "98%",
           alignItems: "center",
@@ -71,7 +72,9 @@ class SearchPage extends Component {
       <View style={styles.container}>
         <Header onChangeText={text => console.log(text)} />
         <View>
-          <Text style={{ marginHorizontal: 10, marginVertical: 5 }}>
+          <Text
+            style={{ color: "white", marginHorizontal: 10, marginVertical: 5 }}
+          >
             Minimum Investment Amount
           </Text>
           <MinAmtChooser />
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: BG_COLOR
   },
   welcome: {
     fontSize: 20,

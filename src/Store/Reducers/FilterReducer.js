@@ -1,8 +1,8 @@
 import {
   CHANGE_FILTER_STATE,
-  FETCH_RESULTS,
-  FETCH_RESULTS_SUCCESS,
-  FETCH_RESULTS_FAILURE
+  FETCH_RESULT,
+  FETCH_RESULT_SUCCESS,
+  FETCH_RESULT_FAILURE
 } from "../ActionNames";
 
 import update from "immutability-helper";
@@ -66,10 +66,10 @@ export default function Filters(state = initialState, action) {
     case CHANGE_FILTER_STATE: {
       return state;
     }
-    case FETCH_RESULTS: {
+    case FETCH_RESULT: {
       return { ...state, isLoading: true, isSuccess: false, isError: false };
     }
-    case FETCH_RESULTS_SUCCESS: {
+    case FETCH_RESULT_SUCCESS: {
       return {
         ...state,
         cases: [...state.cases, action.case],
@@ -78,7 +78,7 @@ export default function Filters(state = initialState, action) {
         isError: false
       };
     }
-    case FETCH_RESULTS_FAILURE: {
+    case FETCH_RESULT_FAILURE: {
       return { ...state, isLoading: false, isSuccess: false, isError: true };
     }
 

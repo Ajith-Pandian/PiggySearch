@@ -17,19 +17,13 @@ export default class Category extends Component {
             backgroundColor: PRIMARY
           }}
         >
-          <RoundedButton
-            text={"Commodities"}
-            onPress={() => console.log("pressed")}
-          />
-          <RoundedButton text={"Dept"} onPress={() => console.log("pressed")} />
-          <RoundedButton
-            text={"Hybrid"}
-            onPress={() => console.log("pressed")}
-          />
-          <RoundedButton
-            text={"Equity"}
-            onPress={() => console.log("pressed")}
-          />
+          {Object.keys(CATEGORY_PARAMS).map((key, index) => (
+            <RoundedButton
+              key={index}
+              text={CATEGORY_PARAMS[key].name}
+              onPress={isActive => console.log("pressed")}
+            />
+          ))}
         </View>
       </View>
     );

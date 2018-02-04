@@ -4,47 +4,22 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions,
+  StatusBar
 } from "react-native";
 import { connect } from "react-redux";
 
+import Header from "./Header";
 import MinAmtChooser from "../Components/MinAmtChooser";
 import RoundedButton from "../Components/RoundedButton";
 import Category from "./Category";
+import Results from "./ResultsPage";
 
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
-const Header = onChangeText => {
-  return (
-    <View
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        width: "100%",
-        height: 60,
-        backgroundColor: PRIMARY
-      }}
-    >
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 1,
-          borderRadius: 6,
-          backgroundColor: "white",
-          marginHorizontal: 20,
-          marginVertical: 10,
-          paddingHorizontal: 10
-        }}
-        onChangeText={text => onChangeText(text)}
-        placeholder={"Search"}
-      />
-    </View>
-  );
-};
+const { height: DEVICE_HEIGHT } = Dimensions.get("window");
 
 const Button = ({ text, onPress, style }) => {
   return (
@@ -56,7 +31,9 @@ const Button = ({ text, onPress, style }) => {
           margin: 2,
           width: "98%",
           alignItems: "center",
-          paddingVertical: 10
+          paddingVertical: 10,
+          position: "absolute",
+          bottom: 0
         },
         style
       ]}
@@ -65,38 +42,52 @@ const Button = ({ text, onPress, style }) => {
     </TouchableOpacity>
   );
 };
-class SearchPage extends Component {
-  render() {
-    let { navigation, _changeFilter } = this.props;
-    return (
-      <View style={styles.container}>
-        <Header onChangeText={text => console.log(text)} />
+const PrimaryFilter = () => {
+  return (
+    <View>
+      <View style={{ justifyContent: "center", marginVertical: 60 }}>
         <View>
           <Text
-            style={{ color: "white", marginHorizontal: 10, marginVertical: 5 }}
+            style={{
+              color: "white",
+              marginHorizontal: 10,
+              marginVertical: 5
+            }}
           >
             Minimum Investment Amount
           </Text>
           <MinAmtChooser />
         </View>
         <Category />
-        <Button
-          text={"SEARCH"}
-          style={{ position: "absolute", bottom: 0 }}
-          onPress={() => {
-            navigation.navigate("Filter");
-            _changeFilter();
-          }}
-        />
+      </View>
+      <Button
+        text={"SEARCH"}
+        style={{}}
+        onPress={() => {
+          navigation.navigate("Filter");
+          _changeFilter();
+        }}
+      />
+    </View>
+  );
+};
+class SearchPage extends Component {
+  render() {
+    let { navigation, isResultsVisible, _changeFilter } = this.props;
+    return (
+      <View style={styles.container}>
+        {isResultsVisible ? <Results /> : <PrimaryFilter />}
       </View>
     );
   }
 }
-SearchPage.navigationOptions = { header: null };
+SearchPage.navigationOptions = {
+  header: <Header onChangeText={text => console.log(text)} />
+};
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter } = FilterReducer;
-  return { filter };
+  let { filter, isResultsVisible } = FilterReducer;
+  return { filter, isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeFilter: filters => dispatch(changeFilter(filters))
@@ -104,7 +95,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 40,
+    height: DEVICE_HEIGHT - (StatusBar.currentHeight + 40),
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: BG_COLOR

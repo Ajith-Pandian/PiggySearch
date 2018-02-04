@@ -1,8 +1,9 @@
 export default class Api {
   static headers() {
     return {
-      "cache-control": "no-cache",
-      "content-type": "application/json"
+      "Cache-Control": "no-cache",
+      "Content-Type": "application/json",
+      Accept: "application/json"
     };
   }
 
@@ -23,19 +24,15 @@ export default class Api {
   }
 
   static request(url, token, params, verb) {
-    var formData = new FormData();
-
-    for (var name in params) {
-      formData.append(name, params[name]);
-    }
     let options = Object.assign(
       { method: verb },
-      params ? { body: formData } : null
+      params ? { body: JSON.stringify(params) } : null
     );
+
+    options.headers = { ...Api.headers(), Authorization: token };
 
     console.log(options);
 
-    options.headers = { ...Api.headers(), authorization: token };
     return fetch(url, options)
       .then(response => response.json())
       .then(responseJson => responseJson)

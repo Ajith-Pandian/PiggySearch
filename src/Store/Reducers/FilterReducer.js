@@ -1,8 +1,10 @@
 import {
   CHANGE_FILTER_STATE,
+  CHANGE_SEARCH_TERM,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
-  FETCH_RESULT_FAILURE
+  FETCH_RESULT_FAILURE,
+  CHANGE_RESULTS_VISIBILITY
 } from "../ActionNames";
 
 import update from "immutability-helper";
@@ -51,6 +53,11 @@ const subCategories = {
 };
 
 const initialState = {
+  isResultsVisible: false,
+  searchTerm: "",
+  result: undefined,
+  rows: 50,
+  offset: 0,
   filters: {
     [RISKS.name]: addActiveToChildren(RISKS_PARAMS),
     [CATEGORIES.name]: addActiveToChildren(CATEGORY_PARAMS),
@@ -66,13 +73,19 @@ export default function Filters(state = initialState, action) {
     case CHANGE_FILTER_STATE: {
       return state;
     }
+    case CHANGE_RESULTS_VISIBILITY: {
+      return { ...state, isResultsVisible: action.isVisible };
+    }
+    case CHANGE_SEARCH_TERM: {
+      return { ...state, searchTerm: action.searchTerm };
+    }
     case FETCH_RESULT: {
       return { ...state, isLoading: true, isSuccess: false, isError: false };
     }
     case FETCH_RESULT_SUCCESS: {
       return {
         ...state,
-        cases: [...state.cases, action.case],
+        result: action.result,
         isLoading: false,
         isSuccess: true,
         isError: false

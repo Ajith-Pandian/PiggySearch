@@ -4,7 +4,7 @@ export const BG_COLOR = "#37454F";
 export const PINK = "#9B3ECB";
 export const PINK_DARK = "#5B5871";
 
-export const BASE_URL = "https://api.piggy.co.in/v2/mf/search/";
+export const BASE_URL = "https://api.piggy.co.in";
 
 export const TOKEN = "Token a41d2b39e3b47412504509bb5a1b66498fb1f43a";
 
@@ -36,8 +36,9 @@ export const HYBRID = { name: "Hybrid", value: "hybrid" };
 export const CATEGORY_PARAMS = {
   COMMODITIES,
   DEBT,
-  EQUITY,
-  HYBRID
+
+  HYBRID,
+  EQUITY
 };
 
 // SUB CATEGORIES

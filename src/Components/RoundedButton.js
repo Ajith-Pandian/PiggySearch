@@ -24,7 +24,8 @@ export default class RoundedButton extends Component {
             height: 40,
             backgroundColor: isActive ? PINK : PINK_DARK,
             margin: 5,
-            padding: 15,
+            paddingHorizontal: 15,
+            paddingVertical: 10,
             borderRadius: 30,
             alignItems: "center",
             justifyContent: "center"

@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import Header from "./Header";
 import MinAmtChooser from "../Components/MinAmtChooser";
 import RoundedButton from "../Components/RoundedButton";
+import Button from "../Components/Button";
 import Category from "./Category";
 import Results from "./ResultsPage";
 
@@ -21,31 +22,10 @@ import { changeFilter } from "../Store/Actions/FillerActions";
 
 const { height: DEVICE_HEIGHT } = Dimensions.get("window");
 
-const Button = ({ text, onPress, style }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => onPress()}
-      style={[
-        {
-          backgroundColor: PINK,
-          margin: 2,
-          width: "98%",
-          alignItems: "center",
-          paddingVertical: 10,
-          position: "absolute",
-          bottom: 0
-        },
-        style
-      ]}
-    >
-      <Text style={{ color: "white" }}>{text}</Text>
-    </TouchableOpacity>
-  );
-};
-const PrimaryFilter = () => {
+const PrimaryFilter = ({ onSearchPress }) => {
   return (
     <View>
-      <View style={{ justifyContent: "center", marginVertical: 60 }}>
+      <View style={{ flex: 1, justifyContent: "center", marginVertical: 60 }}>
         <View>
           <Text
             style={{
@@ -62,11 +42,12 @@ const PrimaryFilter = () => {
       </View>
       <Button
         text={"SEARCH"}
-        style={{}}
-        onPress={() => {
-          navigation.navigate("Filter");
-          _changeFilter();
+        style={{
+          position: "absolute",
+          bottom: 0,
+          width: "98%"
         }}
+        onPress={() => onSearchPress()}
       />
     </View>
   );
@@ -76,7 +57,16 @@ class SearchPage extends Component {
     let { navigation, isResultsVisible, _changeFilter } = this.props;
     return (
       <View style={styles.container}>
-        {isResultsVisible ? <Results /> : <PrimaryFilter />}
+        {isResultsVisible ? (
+          <Results />
+        ) : (
+          <PrimaryFilter
+            onSearchPress={() => {
+              navigation.navigate("Filter");
+              _changeFilter();
+            }}
+          />
+        )}
       </View>
     );
   }

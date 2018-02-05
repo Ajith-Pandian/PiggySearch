@@ -26,7 +26,12 @@ const FilterTabs = TabNavigator(
 export default class FilterPage extends Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: BG_COLOR
+        }}
+      >
         <FilterTabs />
         <Button
           text={"APPLY FILTERS"}

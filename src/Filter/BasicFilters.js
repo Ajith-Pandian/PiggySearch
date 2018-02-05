@@ -1,23 +1,23 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 import Button from "../Components/Button";
 import RiskChooser from "../Components/RiskChooser";
+import FundCategory from "../Components/FundCategory";
 
 export default class BasicFilter extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
         <RiskChooser />
-      </View>
+        <FundCategory />
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-
-    backgroundColor: BG_COLOR
+    paddingBottom: 60
   }
 });

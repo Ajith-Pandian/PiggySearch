@@ -55,7 +55,7 @@ const MULTI_COMMODITIES = {
 };
 const GOLD = { name: "Gold", value: "gold" };
 
-export const COMMODITIES_PARAMS = { MULTI_COMMODITIES, GOLD };
+export const COMMODITIES_PARAMS = [MULTI_COMMODITIES, GOLD];
 
 //// DEBT SUB CATEGORIES
 const CREDIT_OPPORTUNITIES = {
@@ -76,7 +76,7 @@ const SHORT_TERM = { name: "Short Term", value: "short_term" };
 const INCOME = { name: "Income", value: "income" };
 const LIQUID = { name: "Liquid", value: "liquid" };
 
-export const DEBT_PARAMS = {
+export const DEBT_PARAMS = [
   CREDIT_OPPORTUNITIES,
   DYNAMIC_BOND,
   ULTRA_SHORT_TERM,
@@ -85,7 +85,7 @@ export const DEBT_PARAMS = {
   SHORT_TERM,
   INCOME,
   LIQUID
-};
+];
 
 //// EQUITY SUB CATEGORIES
 const ENERGY = { name: "Energy", value: "energy" };
@@ -108,7 +108,7 @@ const PHARMA = { name: "Pharma", value: "pharma" };
 const SMALL_CAP = { name: "Small Cap", value: "small_cap" };
 const TAX_PLANNING = { name: "Tax Planning", value: "tax_planning" };
 
-export const EQUITY_PARAMS = {
+export const EQUITY_PARAMS = [
   ENERGY,
   ENTERTAINMENT,
   MNC,
@@ -125,7 +125,7 @@ export const EQUITY_PARAMS = {
   PHARMA,
   SMALL_CAP,
   TAX_PLANNING
-};
+];
 //// HYBRID SUB CATEGORIES
 const ARBITRAGE = { name: "Arbitrage", value: "arbitrage" };
 const ASSET_ALLOCATION = {
@@ -145,7 +145,7 @@ const DEBT_ORIENTED_CONSERVATIVE = {
 const EQUITY_ORIENTED = { name: "Equity oriented", value: "equity_oriented" };
 const MIP_AGGRESSIVE = { name: "MIP Aggressive", value: "mip_aggressive" };
 
-export const HYBRID_PARAMS = {
+export const HYBRID_PARAMS = [
   ARBITRAGE,
   ASSET_ALLOCATION,
   FUND_OF_FUNDS,
@@ -154,14 +154,14 @@ export const HYBRID_PARAMS = {
   DEBT_ORIENTED_CONSERVATIVE,
   EQUITY_ORIENTED,
   MIP_AGGRESSIVE
-};
+];
 
-// export const SUB_CATEGORY_PARAMS = {
-//   [COMMODITIES.name]: COMMODITIES_PARAMS,
-//   [DEBT.name]: DEPT_PARAMS,
-//   [EQUITY.name]: EQUITY_PARAMS,
-//   [HYBRID.name]: HYBRID_PARAMS
-// };
+export const SUB_CATEGORY_PARAMS = {
+  [COMMODITIES.name]: { name: COMMODITIES.name, value: COMMODITIES_PARAMS },
+  [DEBT.name]: { name: DEBT.name, value: DEBT_PARAMS },
+  [EQUITY.name]: { name: EQUITY.name, value: EQUITY_PARAMS },
+  [HYBRID.name]: { name: HYBRID.name, value: HYBRID_PARAMS }
+};
 
 // MINIMUM_INVESTMENTS
 export const MINIMUM_INVESTMENTS = {

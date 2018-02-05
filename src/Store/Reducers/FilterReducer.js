@@ -45,13 +45,6 @@ const arrayToObject = array =>
     return obj;
   }, {});
 
-const subCategories = {
-  [COMMODITIES.name]: addActiveToChildren(COMMODITIES_PARAMS),
-  [DEBT.name]: addActiveToChildren(DEBT_PARAMS),
-  [EQUITY.name]: addActiveToChildren(EQUITY_PARAMS),
-  [HYBRID.name]: addActiveToChildren(HYBRID_PARAMS)
-};
-
 const initialState = {
   isResultsVisible: false,
   searchTerm: "",
@@ -63,8 +56,8 @@ const initialState = {
     [CATEGORIES.name]: addActiveToChildren(CATEGORY_PARAMS),
     [MINIMUM_INVESTMENTS.name]: addActiveToChildren(MINIMUM_INVESTMENTS_PARAMS),
     [PLAN_TYPE.name]: addActiveToChildren(PLAN_TYPE_PARAMS),
-    [AMC.name]: addActiveToChildren(AMC_PARAMS),
-    [SUB_CATEGORIES.name]: subCategories
+    [AMC.name]: addActiveToChildren(AMC_PARAMS)
+    //[SUB_CATEGORIES.name]: subCategories
   }
 };
 

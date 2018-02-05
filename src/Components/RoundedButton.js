@@ -37,7 +37,6 @@ export default class RoundedButton extends Component {
           style={[
             {
               color: "white",
-              fontSize: 16,
               textAlign: "center",
               textAlignVertical: "center"
             },

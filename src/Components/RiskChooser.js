@@ -6,7 +6,7 @@ import CheckBox from "../Components/CheckBox";
 export default class RiskChooser extends Component {
   render() {
     return (
-      <View style={{}}>
+      <View style={{ marginHorizontal: 10 }}>
         <Text
           style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
         >
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    backgroundColor: PRIMARY,
-    marginHorizontal: 10
+    backgroundColor: PRIMARY
   }
 });

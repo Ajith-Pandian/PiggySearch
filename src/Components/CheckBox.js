@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import Check from "react-native-check-box";
 import { PRIMARY } from "../Constants";
-const CheckBox = ({ text, checked, style, onChange }) => (
+const CheckBox = ({
+  text,
+  checked,
+  style,
+  onChange,
+  disabled = false,
+  isChecked = false
+}) => (
   <Check
     style={[
       {
@@ -13,8 +20,9 @@ const CheckBox = ({ text, checked, style, onChange }) => (
     ]}
     leftTextStyle={{ color: "white" }}
     checkBoxColor={"white"}
+    disabled={disabled}
     onClick={checked => onChange(checked)}
-    isChecked={true}
+    isChecked={isChecked}
     leftText={text}
   />
 );

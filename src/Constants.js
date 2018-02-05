@@ -34,7 +34,7 @@ const MULTI_COMMODITIES = {
 };
 const GOLD = { name: "Gold", value: "gold" };
 
-export const COMMODITIES_PARAMS = [MULTI_COMMODITIES, GOLD];
+const COMMODITIES_PARAMS = [MULTI_COMMODITIES, GOLD];
 
 //// DEBT SUB CATEGORIES
 const CREDIT_OPPORTUNITIES = {
@@ -55,7 +55,7 @@ const SHORT_TERM = { name: "Short Term", value: "short_term" };
 const INCOME = { name: "Income", value: "income" };
 const LIQUID = { name: "Liquid", value: "liquid" };
 
-export const DEBT_PARAMS = [
+const DEBT_PARAMS = [
   CREDIT_OPPORTUNITIES,
   DYNAMIC_BOND,
   ULTRA_SHORT_TERM,
@@ -87,7 +87,7 @@ const PHARMA = { name: "Pharma", value: "pharma" };
 const SMALL_CAP = { name: "Small Cap", value: "small_cap" };
 const TAX_PLANNING = { name: "Tax Planning", value: "tax_planning" };
 
-export const EQUITY_PARAMS = [
+const EQUITY_PARAMS = [
   ENERGY,
   ENTERTAINMENT,
   MNC,
@@ -124,7 +124,7 @@ const DEBT_ORIENTED_CONSERVATIVE = {
 const EQUITY_ORIENTED = { name: "Equity oriented", value: "equity_oriented" };
 const MIP_AGGRESSIVE = { name: "MIP Aggressive", value: "mip_aggressive" };
 
-export const HYBRID_PARAMS = [
+const HYBRID_PARAMS = [
   ARBITRAGE,
   ASSET_ALLOCATION,
   FUND_OF_FUNDS,
@@ -167,7 +167,7 @@ export const CATEGORIES = {
 const HUNDRED = { name: "100", value: 100 };
 const FINE_HUNDRED = { name: "500", value: 500 };
 const THOUSAND = { name: "1000", value: 1000 };
-const MORE_THAN_THOUSAND = { name: "1000+", value: 10000 };
+const MORE_THAN_THOUSAND = { name: "1000+", value: -1 };
 
 const MINIMUM_INVESTMENTS_PARAMS = [
   HUNDRED,
@@ -179,7 +179,8 @@ const MINIMUM_INVESTMENTS_PARAMS = [
 export const MINIMUM_INVESTMENTS = {
   name: "Minimum Investments",
   value: "minimum_investments",
-  children: MINIMUM_INVESTMENTS_PARAMS
+  children: MINIMUM_INVESTMENTS_PARAMS,
+  default: MORE_THAN_THOUSAND.name
 };
 // FUND HOUSE NAMES
 
@@ -252,5 +253,6 @@ const PLAN_TYPE_PARAMS = [DIRECT_PLAN, REGULAR_PLAN];
 export const PLAN_TYPES = {
   name: "Plan Type",
   value: "plan_type",
-  children: PLAN_TYPE_PARAMS
+  children: PLAN_TYPE_PARAMS,
+  default: DIRECT_PLAN.name
 };

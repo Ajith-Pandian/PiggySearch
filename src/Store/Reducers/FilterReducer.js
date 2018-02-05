@@ -13,31 +13,47 @@ import update from "immutability-helper";
 
 import {
   RISKS,
-  RISKS_PARAMS,
   CATEGORIES,
-  CATEGORY_PARAMS,
   MINIMUM_INVESTMENTS,
-  MINIMUM_INVESTMENTS_PARAMS,
   PLAN_TYPES,
-  FUND_HOUSES,
-  SUB_CATEGORIES,
-  COMMODITIES,
-  COMMODITIES_PARAMS,
-  DEBT,
-  DEBT_PARAMS,
-  EQUITY,
-  EQUITY_PARAMS,
-  HYBRID,
-  HYBRID_PARAMS
+  FUND_HOUSES
 } from "../../Constants";
-import { arrayToObject } from "../../Utils";
 
 const addActiveToArray = arr => arr.map(item => ({ ...item, active: false }));
 
-const addActiveToChildArray = arr =>
-  arr.map(item => ({ ...item, children: addActiveToArray(item.children) }));
+const addActiveToArrayAndChild = arr =>
+  arr.map(item => ({
+    ...item,
+    children: addActiveToArray(item.children),
+    active: false
+  }));
 
-const categories = {};
+const filters = {
+  [RISKS.name]: addActiveToArray(RISKS.children),
+  [CATEGORIES.name]: addActiveToArrayAndChild(CATEGORIES.children),
+  [FUND_HOUSES.name]: addActiveToArray(FUND_HOUSES.children),
+  [MINIMUM_INVESTMENTS.name]: addActiveToArray(MINIMUM_INVESTMENTS.children),
+  [PLAN_TYPES.name]: addActiveToArray(PLAN_TYPES.children)
+};
+
+const applyDefaultActive = (filters, toActiveFilters) => {
+  for (i = 0; i < toActiveFilters.length; i++) {
+    let activeFilter = toActiveFilters[i];
+    let activeFilterName = activeFilter.name;
+    let defaultName = activeFilter.default;
+    let defaultItemIndex = activeFilter.children.findIndex(
+      item => item.name === defaultName
+    );
+    filters = update(filters, {
+      [activeFilterName]: { [defaultItemIndex]: { active: { $set: true } } }
+    });
+  }
+  return filters;
+};
+const defaultAppliedFilters = applyDefaultActive(filters, [
+  MINIMUM_INVESTMENTS,
+  PLAN_TYPES
+]);
 
 const initialState = {
   isResultsVisible: false,
@@ -45,14 +61,7 @@ const initialState = {
   result: undefined,
   rows: 50,
   offset: 0,
-  filters: {
-    [RISKS.name]: addActiveToArray(RISKS.children),
-    [CATEGORIES.name]: addActiveToChildArray(CATEGORIES.children),
-    [MINIMUM_INVESTMENTS.name]: addActiveToArray(MINIMUM_INVESTMENTS.children),
-    [PLAN_TYPES.name]: addActiveToArray(PLAN_TYPES.children),
-    [FUND_HOUSES.name]: addActiveToArray(FUND_HOUSES.children)
-    //[SUB_CATEGORIES.name]: subCategories
-  }
+  filters: defaultAppliedFilters
 };
 
 export default function Filters(state = initialState, action) {

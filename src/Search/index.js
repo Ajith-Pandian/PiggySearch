@@ -14,7 +14,7 @@ import Header from "./Header";
 import AmountChooser from "../Components/AmountChooser";
 import RoundedButton from "../Components/RoundedButton";
 import Button from "../Components/Button";
-import Category from "./Category";
+import Category from "../Components/Category";
 import Results from "./ResultsPage";
 
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";

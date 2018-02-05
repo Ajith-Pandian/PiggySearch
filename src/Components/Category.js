@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { connect } from "react-redux";
 import RoundedButton from "../Components/RoundedButton";
-import { PRIMARY, CATEGORIES, CATEGORY_PARAMS } from "../Constants";
+import { PRIMARY, CATEGORIES } from "../Constants";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
 class Category extends Component {
@@ -13,7 +13,7 @@ class Category extends Component {
         <Text
           style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
         >
-          Categories
+          {CATEGORIES.name}
         </Text>
         <View
           style={{
@@ -24,8 +24,8 @@ class Category extends Component {
             backgroundColor: PRIMARY
           }}
         >
-          {Object.keys(CATEGORY_PARAMS).map((key, index) => {
-            const categoryName = CATEGORY_PARAMS[key].name;
+          {CATEGORIES.children.map((item, index) => {
+            const categoryName = item.name;
             return (
               <RoundedButton
                 key={index}

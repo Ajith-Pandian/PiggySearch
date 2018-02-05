@@ -1,11 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import StepSlider from "./StepSlider";
-import {
-  PRIMARY,
-  MINIMUM_INVESTMENTS,
-  MINIMUM_INVESTMENTS_PARAMS as amount
-} from "../Constants";
+import { PRIMARY, MINIMUM_INVESTMENTS } from "../Constants";
 import { connect } from "react-redux";
 import { changeAmountFilter } from "../Store/Actions/FillerActions";
 import { arrayToObject } from "../Utils";
@@ -28,7 +24,7 @@ const AmountChooser = ({ _changeAmountFilter }) => {
         <StepSlider
           steps={4}
           onSelect={val => {
-            _changeAmountFilter(amount[val].name, true);
+            _changeAmountFilter(MINIMUM_INVESTMENTS.children[val].name, true);
           }}
         />
         <View
@@ -37,7 +33,7 @@ const AmountChooser = ({ _changeAmountFilter }) => {
             justifyContent: "space-between"
           }}
         >
-          {amount.map((item, index) => {
+          {MINIMUM_INVESTMENTS.children.map((item, index) => {
             return (
               <Text key={index} style={{ color: "white" }}>
                 {item.name}

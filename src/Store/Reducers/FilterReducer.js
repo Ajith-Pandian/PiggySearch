@@ -17,8 +17,7 @@ import {
   CATEGORY_PARAMS,
   MINIMUM_INVESTMENTS,
   MINIMUM_INVESTMENTS_PARAMS,
-  PLAN_TYPE,
-  PLAN_TYPE_PARAMS,
+  PLAN_TYPES,
   FUND_HOUSES,
   SUB_CATEGORIES,
   COMMODITIES,
@@ -40,6 +39,8 @@ const addParamToChildren = (arr, param) =>
 const addActiveToChildren = obj =>
   addParamToChildren(obj, { name: "active", value: false });
 
+const addActiveToArray = arr => arr.map(item => ({ ...item, active: false }));
+
 const initialState = {
   isResultsVisible: false,
   searchTerm: "",
@@ -47,11 +48,11 @@ const initialState = {
   rows: 50,
   offset: 0,
   filters: {
-    [RISKS.name]: addActiveToChildren(RISKS_PARAMS),
-    [CATEGORIES.name]: addActiveToChildren(CATEGORY_PARAMS),
-    [MINIMUM_INVESTMENTS.name]: MINIMUM_INVESTMENTS_PARAMS.slice(),
-    [PLAN_TYPE.name]: addActiveToChildren(PLAN_TYPE_PARAMS),
-    [FUND_HOUSES.name]: addActiveToChildren(FUND_HOUSES.value)
+    [RISKS.name]: addActiveToArray(RISKS.children),
+    [CATEGORIES.name]: addActiveToArray(CATEGORIES.children),
+    [MINIMUM_INVESTMENTS.name]: addActiveToArray(MINIMUM_INVESTMENTS.children),
+    [PLAN_TYPES.name]: addActiveToArray(PLAN_TYPES.children),
+    [FUND_HOUSES.name]: addActiveToArray(FUND_HOUSES.children)
     //[SUB_CATEGORIES.name]: subCategories
   }
 };
@@ -60,10 +61,13 @@ export default function Filters(state = initialState, action) {
   switch (action.type) {
     case CHANGE_FILTER_STATE: {
       let { filterName, childName, isActive } = action;
+      let index = state.filters[filterName].findIndex(
+        item => item.name === childName
+      );
       return update(state, {
         filters: {
           [filterName]: {
-            [childName]: {
+            [index]: {
               active: { $set: isActive }
             }
           }
@@ -72,7 +76,7 @@ export default function Filters(state = initialState, action) {
     }
     case CHANGE_AMOUNT_FILTER_STATE: {
       let { childName, isActive } = action;
-      const newInvestmentsState = MINIMUM_INVESTMENTS_PARAMS.map(item => {
+      const newInvestmentsState = MINIMUM_INVESTMENTS.children.map(item => {
         return { ...item, active: item.name === childName };
       });
       return update(state, {

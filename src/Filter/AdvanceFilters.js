@@ -1,31 +1,50 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { PRIMARY, PINK, BG_COLOR, FUND_HOUSES as data } from "../Constants";
+import { connect } from "react-redux";
+
+import { PRIMARY, PINK, BG_COLOR, FUND_HOUSES } from "../Constants";
 import Button from "../Components/Button";
 import CheckBox from "../Components/CheckBox";
+import { changeFilter } from "../Store/Actions/FillerActions";
 
-export default class BasicFilter extends Component {
+class BasicFilter extends Component {
   render() {
+    let { _changeFilter } = this.props;
     return (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
         <Text
           style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
         >
-          Fund House
+          {FUND_HOUSES.name}
         </Text>
-        {data.value.map((item, index) => (
-          <CheckBox
-            key={index}
-            isChecked={false}
-            text={item.name}
-            style={{ height: 50, marginVertical: 1 }}
-            onChange={() => {}}
-          />
-        ))}
+        {FUND_HOUSES.children.map((item, index) => {
+          const houseName = item.name;
+          return (
+            <CheckBox
+              key={index}
+              isChecked={false}
+              text={houseName}
+              style={{ height: 50, marginVertical: 1 }}
+              onChange={isActive =>
+                _changeFilter(FUND_HOUSES.name, houseName, isActive)
+              }
+            />
+          );
+        })}
       </ScrollView>
     );
   }
 }
+
+const mapStateToProps = ({ FilterReducer }) => {
+  let { filter, isResultsVisible } = FilterReducer;
+  return { filter, isResultsVisible };
+};
+const mapDispatchToProps = (dispatch, props) => ({
+  _changeFilter: (filterName, childName, isActive) =>
+    dispatch(changeFilter(filterName, childName, isActive))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(BasicFilter);
 
 const styles = StyleSheet.create({
   container: {

@@ -9,7 +9,6 @@ export const BASE_URL = "https://api.piggy.co.in";
 export const TOKEN = "Token a41d2b39e3b47412504509bb5a1b66498fb1f43a";
 
 //// RISKS
-export const RISKS = { name: "Risks", value: "risks" };
 
 const LOW = { name: "Low", value: "low" };
 const MODERATELY_LOW = { name: "Moderately Low", value: "moderately_low" };
@@ -17,28 +16,23 @@ const MODERATE = { name: "Moderate", value: "moderate" };
 const MODERATELY_HIGH = { name: "Moderately High", value: "moderately_high" };
 const HIGH = { name: "High", value: "high" };
 
-export const RISKS_PARAMS = {
-  LOW,
-  MODERATELY_LOW,
-  MODERATE,
-  MODERATELY_HIGH,
-  HIGH
-};
+const RISKS_PARAMS = [LOW, MODERATELY_LOW, MODERATE, MODERATELY_HIGH, HIGH];
+
+export const RISKS = { name: "Risks", value: "risks", children: RISKS_PARAMS };
 
 // CATEGORIES
-export const CATEGORIES = { name: "Categories", value: "categories" };
 
 export const COMMODITIES = { name: "Commodities", value: "commodities" };
 export const DEBT = { name: "Debt", value: "debt" };
 export const EQUITY = { name: "Equity", value: "equity" };
 export const HYBRID = { name: "Hybrid", value: "hybrid" };
 
-export const CATEGORY_PARAMS = {
-  COMMODITIES,
-  DEBT,
+const CATEGORY_PARAMS = [COMMODITIES, DEBT, HYBRID, EQUITY];
 
-  HYBRID,
-  EQUITY
+export const CATEGORIES = {
+  name: "Categories",
+  value: "categories",
+  children: CATEGORY_PARAMS
 };
 
 // SUB CATEGORIES
@@ -164,22 +158,24 @@ export const SUB_CATEGORY_PARAMS = {
 };
 
 // MINIMUM_INVESTMENTS
-export const MINIMUM_INVESTMENTS = {
-  name: "Minimum Investments",
-  value: "minimum_investments"
-};
 
 const HUNDRED = { name: "100", value: 100 };
 const FINE_HUNDRED = { name: "500", value: 500 };
 const THOUSAND = { name: "1000", value: 1000 };
 const MORE_THAN_THOUSAND = { name: "1000+", value: 10000 };
 
-export const MINIMUM_INVESTMENTS_PARAMS = [
+const MINIMUM_INVESTMENTS_PARAMS = [
   HUNDRED,
   FINE_HUNDRED,
   THOUSAND,
   MORE_THAN_THOUSAND
 ];
+
+export const MINIMUM_INVESTMENTS = {
+  name: "Minimum Investments",
+  value: "minimum_investments",
+  children: MINIMUM_INVESTMENTS_PARAMS
+};
 // FUND HOUSE NAMES
 
 const IDFC_MUTUAL_FUND = {
@@ -223,26 +219,33 @@ const DSP_BLACKROCK_MUTUAL_FUND = {
   value: "dsp_blackrock_mutual_fund"
 };
 
+const FUND_HOUSE_PARAMS = [
+  IDFC_MUTUAL_FUND,
+  KOTAK_MAHINDRA_MUTUAL_FUND,
+  BIRLA_SUN_LIFE_MUTUAL_FUND,
+  DHFL_PRAMERICA_MUTUAL_FUND,
+  HDFC_MUTUAL_FUND,
+  RELIANCE_MUTUAL_FUND,
+  SBI_MUTUAL_FUND,
+  AXIS_ASSET_MUTUAL_FUND,
+  CANARA_ROBECO_MUTUAL_FUND,
+  DSP_BLACKROCK_MUTUAL_FUND
+];
 export const FUND_HOUSES = {
   name: "Fund Category",
-  value: [
-    IDFC_MUTUAL_FUND,
-    KOTAK_MAHINDRA_MUTUAL_FUND,
-    BIRLA_SUN_LIFE_MUTUAL_FUND,
-    DHFL_PRAMERICA_MUTUAL_FUND,
-    HDFC_MUTUAL_FUND,
-    RELIANCE_MUTUAL_FUND,
-    SBI_MUTUAL_FUND,
-    AXIS_ASSET_MUTUAL_FUND,
-    CANARA_ROBECO_MUTUAL_FUND,
-    DSP_BLACKROCK_MUTUAL_FUND
-  ]
+  value: "amc",
+  children: FUND_HOUSE_PARAMS
 };
 
 // PLAN TYPE
-export const PLAN_TYPE = { name: "Plan Type", value: "plan_type" };
 
 const DIRECT_PLAN = { name: "Direct Plan", value: "direct_plan" };
 const REGULAR_PLAN = { name: "Regular Plan", value: "regular_plan" };
 
-export const PLAN_TYPE_PARAMS = { DIRECT_PLAN, REGULAR_PLAN };
+const PLAN_TYPE_PARAMS = [DIRECT_PLAN, REGULAR_PLAN];
+
+export const PLAN_TYPES = {
+  name: "Plan Type",
+  value: "plan_type",
+  children: PLAN_TYPE_PARAMS
+};

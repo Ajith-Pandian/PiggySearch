@@ -18,7 +18,7 @@ let dataArray = Object.keys(data).map(val => data[val]);
 export default class FundCategory extends Component {
   render() {
     return (
-      <View style={{ marginHorizontal: 10 }}>
+      <View style={{}}>
         <Text
           style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
         >
@@ -33,7 +33,10 @@ export default class FundCategory extends Component {
                 isChecked={isActive}
                 text={section.name}
                 disabled={true}
-                style={{ height: 50 }}
+                style={{
+                  height: 50,
+                  marginHorizontal: 10
+                }}
                 onChange={() => {}}
               />
             );

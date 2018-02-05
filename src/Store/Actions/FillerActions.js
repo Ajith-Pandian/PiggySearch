@@ -1,5 +1,6 @@
 import {
   CHANGE_FILTER_STATE,
+  CHANGE_AMOUNT_FILTER_STATE,
   CHANGE_SEARCH_TERM,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
@@ -8,11 +9,17 @@ import {
 } from "../ActionNames";
 import ApiHelper from "../../ApiHelper";
 
-export const changeFilter = filters => dispatch =>
-  dispatch(_changeFilter(filters));
+export const changeFilter = (filterName, childName, isActive) => dispatch =>
+  dispatch(_changeFilter(filterName, childName, isActive));
 
-function _changeFilter(filters) {
-  return { type: CHANGE_FILTER_STATE, filters };
+function _changeFilter(filterName, childName, isActive) {
+  return { type: CHANGE_FILTER_STATE, filterName, childName, isActive };
+}
+export const changeAmountFilter = (childName, isActive) => dispatch =>
+  dispatch(_changeAmountFilter(childName, isActive));
+
+function _changeAmountFilter(childName, isActive) {
+  return { type: CHANGE_AMOUNT_FILTER_STATE, childName, isActive };
 }
 
 export const changeResultsVisibility = isVisible => dispatch =>

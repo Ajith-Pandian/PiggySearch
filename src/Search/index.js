@@ -26,18 +26,7 @@ const PrimaryFilter = ({ onSearchPress }) => {
   return (
     <View>
       <View style={{ flex: 1, justifyContent: "center", marginVertical: 60 }}>
-        <View>
-          <Text
-            style={{
-              color: "white",
-              marginHorizontal: 10,
-              marginVertical: 5
-            }}
-          >
-            Minimum Investment Amount
-          </Text>
-          <AmountChooser />
-        </View>
+        <AmountChooser />
         <Category />
       </View>
       <Button
@@ -63,7 +52,6 @@ class SearchPage extends Component {
           <PrimaryFilter
             onSearchPress={() => {
               navigation.navigate("Filter");
-              _changeFilter();
             }}
           />
         )}

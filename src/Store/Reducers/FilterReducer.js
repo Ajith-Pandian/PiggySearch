@@ -1,5 +1,6 @@
 import {
   CHANGE_FILTER_STATE,
+  CHANGE_AMOUNT_FILTER_STATE,
   CHANGE_SEARCH_TERM,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
@@ -29,6 +30,7 @@ import {
   HYBRID,
   HYBRID_PARAMS
 } from "../../Constants";
+import { arrayToObject } from "../../Utils";
 
 const addParam = (obj, param) => ({ ...obj, [param.name]: param.value });
 
@@ -37,12 +39,6 @@ const addParamToChildren = (arr, param) =>
 
 const addActiveToChildren = obj =>
   addParamToChildren(obj, { name: "active", value: false });
-
-const arrayToObject = array =>
-  array.reduce((obj, item) => {
-    obj[item.name] = item;
-    return obj;
-  }, {});
 
 const initialState = {
   isResultsVisible: false,
@@ -53,7 +49,7 @@ const initialState = {
   filters: {
     [RISKS.name]: addActiveToChildren(RISKS_PARAMS),
     [CATEGORIES.name]: addActiveToChildren(CATEGORY_PARAMS),
-    [MINIMUM_INVESTMENTS.name]: addActiveToChildren(MINIMUM_INVESTMENTS_PARAMS),
+    [MINIMUM_INVESTMENTS.name]: MINIMUM_INVESTMENTS_PARAMS.slice(),
     [PLAN_TYPE.name]: addActiveToChildren(PLAN_TYPE_PARAMS),
     [FUND_HOUSES.name]: addActiveToChildren(FUND_HOUSES.value)
     //[SUB_CATEGORIES.name]: subCategories
@@ -63,7 +59,30 @@ const initialState = {
 export default function Filters(state = initialState, action) {
   switch (action.type) {
     case CHANGE_FILTER_STATE: {
-      return state;
+      let { filterName, childName, isActive } = action;
+
+      return update(state, {
+        filters: {
+          [filterName]: {
+            [childName]: {
+              active: { $set: isActive }
+            }
+          }
+        }
+      });
+    }
+    case CHANGE_AMOUNT_FILTER_STATE: {
+      let { childName, isActive } = action;
+
+      const newInvestmentsState = MINIMUM_INVESTMENTS_PARAMS.map(item => {
+        return { ...item, active: item.name === childName };
+      });
+
+      return update(state, {
+        filters: {
+          [MINIMUM_INVESTMENTS.name]: { $set: newInvestmentsState }
+        }
+      });
     }
     case CHANGE_RESULTS_VISIBILITY: {
       return { ...state, isResultsVisible: action.isVisible };

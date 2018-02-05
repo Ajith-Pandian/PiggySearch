@@ -174,12 +174,12 @@ const FINE_HUNDRED = { name: "500", value: 500 };
 const THOUSAND = { name: "1000", value: 1000 };
 const MORE_THAN_THOUSAND = { name: "1000+", value: 10000 };
 
-export const MINIMUM_INVESTMENTS_PARAMS = {
+export const MINIMUM_INVESTMENTS_PARAMS = [
   HUNDRED,
   FINE_HUNDRED,
   THOUSAND,
   MORE_THAN_THOUSAND
-};
+];
 // FUND HOUSE NAMES
 
 const IDFC_MUTUAL_FUND = {

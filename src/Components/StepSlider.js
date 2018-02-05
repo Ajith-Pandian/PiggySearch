@@ -1,32 +1,40 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const MAX = 90;
-const MIN = 0;
-const DIV = 3;
+
 import { PINK, PINK_DARK } from "../Constants";
 import Slider from "react-native-slider";
-export default class StepSlider extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      value: 0
-    };
+const MIN = 0,
+  MAX = 100;
+
+export default class StepSlider extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 0 };
   }
   calculateStep = () => {
     let { value: slideValue } = this.state;
-    const val = (MAX - MIN) / DIV;
+    let { onSelect, steps } = this.props;
+    steps = steps - 1;
+    const val = (MAX - MIN) / steps;
     const mod = Math.floor(slideValue / val);
-    mod < DIV ? this.swipeTo(slideValue, val * mod, val * (mod + 1)) : null;
+
+    mod < steps
+      ? this.slideTo(slideValue, val * mod, val * (mod + 1), mod)
+      : null;
   };
-  slideTo = value => {
+  setValue = (value, mod) => {
+    let { onSelect } = this.props;
     this.setState({ value });
+    onSelect(mod);
   };
 
-  swipeTo = (val, min, max) => {
+  slideTo = (val, min, max, mod) => {
     const half = (min + max) / 2;
-    val > min && val < half ? this.slideTo(min) : this.slideTo(max);
+    val > min && val < half
+      ? this.setValue(min, mod)
+      : this.setValue(max, mod + 1);
   };
   render() {
     let { value } = this.state;

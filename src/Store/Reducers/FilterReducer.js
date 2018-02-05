@@ -60,7 +60,6 @@ export default function Filters(state = initialState, action) {
   switch (action.type) {
     case CHANGE_FILTER_STATE: {
       let { filterName, childName, isActive } = action;
-
       return update(state, {
         filters: {
           [filterName]: {
@@ -73,11 +72,9 @@ export default function Filters(state = initialState, action) {
     }
     case CHANGE_AMOUNT_FILTER_STATE: {
       let { childName, isActive } = action;
-
       const newInvestmentsState = MINIMUM_INVESTMENTS_PARAMS.map(item => {
         return { ...item, active: item.name === childName };
       });
-
       return update(state, {
         filters: {
           [MINIMUM_INVESTMENTS.name]: { $set: newInvestmentsState }

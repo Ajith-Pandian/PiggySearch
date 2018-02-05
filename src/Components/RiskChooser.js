@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { PRIMARY, PINK, BG_COLOR, RISKS_PARAMS as data } from "../Constants";
+import {
+  PRIMARY,
+  PINK,
+  BG_COLOR,
+  RISKS,
+  RISKS_PARAMS as data
+} from "../Constants";
 import CheckBox from "../Components/CheckBox";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
@@ -13,7 +19,7 @@ class RiskChooser extends Component {
         <Text
           style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
         >
-          Risks
+          {RISKS.name}
         </Text>
         <View style={styles.container}>
           {Object.keys(data).map((key, index) => {
@@ -23,8 +29,8 @@ class RiskChooser extends Component {
                 key={index}
                 text={riskName}
                 style={{ width: "50%", height: 50 }}
-                onChange={() => {
-                  _changeFilter(riskName);
+                onChange={isActive => {
+                  _changeFilter(RISKS.name, riskName, isActive);
                 }}
               />
             );
@@ -39,7 +45,8 @@ const mapStateToProps = ({ FilterReducer }) => {
   return { filter, isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
-  _changeFilter: filters => dispatch(changeFilter(filters))
+  _changeFilter: (filterName, childName, isActive) =>
+    dispatch(changeFilter(filterName, childName, isActive))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(RiskChooser);
 

@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 
 import Header from "./Header";
-import MinAmtChooser from "../Components/MinAmtChooser";
+import AmountChooser from "../Components/AmountChooser";
 import RoundedButton from "../Components/RoundedButton";
 import Button from "../Components/Button";
 import Category from "./Category";
@@ -36,7 +36,7 @@ const PrimaryFilter = ({ onSearchPress }) => {
           >
             Minimum Investment Amount
           </Text>
-          <MinAmtChooser />
+          <AmountChooser />
         </View>
         <Category />
       </View>

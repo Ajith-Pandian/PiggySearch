@@ -1,37 +1,48 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Slider, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const MAX_VALUE = 100;
-const MIN_VALUE = 0;
+const MAX = 90;
+const MIN = 0;
+const DIV = 3;
 import { PINK, PINK_DARK } from "../Constants";
-
+import Slider from "react-native-slider";
 export default class StepSlider extends Component {
   constructor() {
     super();
 
     this.state = {
-      SliderValue: 0
+      value: 0
     };
   }
+  calculateStep = () => {
+    let { value: slideValue } = this.state;
+    const val = (MAX - MIN) / DIV;
+    const mod = Math.floor(slideValue / val);
+    mod < DIV ? this.swipeTo(slideValue, val * mod, val * (mod + 1)) : null;
+  };
+  slideTo = value => {
+    this.setState({ value });
+  };
 
+  swipeTo = (val, min, max) => {
+    const half = (min + max) / 2;
+    val > min && val < half ? this.slideTo(min) : this.slideTo(max);
+  };
   render() {
-    let { SliderValue } = this.state;
+    let { value } = this.state;
     return (
       <View style={styles.MainContainer}>
         <Slider
-          step={1}
-          minimumValue={MIN_VALUE}
-          maximumValue={MAX_VALUE}
+          value={value}
+          minimumValue={MIN}
+          maximumValue={MAX}
           minimumTrackTintColor={PINK}
-          maximumTrackTintColor={PINK}
+          maximumTrackTintColor={PINK_DARK}
           thumbTintColor={PINK}
-          minimumTrackTintColor="#009688"
-          onValueChange={ChangedValue => {
-            this.setState({ SliderValue: ChangedValue });
-          }}
-          style={{
-            width: SCREEN_WIDTH - 60
-          }}
+          style={{ width: "100%" }}
+          thumbTintColor={PINK}
+          onValueChange={value => this.setState({ value })}
+          onSlidingComplete={() => this.calculateStep(value)}
         />
       </View>
     );

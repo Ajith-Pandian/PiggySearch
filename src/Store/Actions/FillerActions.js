@@ -4,13 +4,14 @@ import {
   CHANGE_PLAN_FILTER_STATE,
   CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
+  APPLY_FILTERS,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
   FETCH_RESULT_FAILURE,
   CHANGE_RESULTS_VISIBILITY
 } from "../ActionNames";
 import ApiHelper from "../../ApiHelper";
-
+import { getApiFilters } from "../../Utils";
 export const changeFilter = (filterName, childName, isActive) => dispatch =>
   dispatch(_changeFilter(filterName, childName, isActive));
 
@@ -35,6 +36,15 @@ export const changeSubFilter = (parentName, childName, isActive) => dispatch =>
 function _changeSubFilter(parentName, childName, isActive) {
   return { type: CHANGE_SUB_FILTER_STATE, parentName, childName, isActive };
 }
+export const applyFilters = () => (dispatch, getState) => {
+  let { searchTerm, rows, offset, filters } = getState().FilterReducer;
+  let apiFilters = getApiFilters(filters);
+  dispatch(fetchResult(searchTerm, rows, offset, filters));
+};
+
+function _applyFilters(apiFilters) {
+  return { type: APPLY_FILTERS, apiFilters };
+}
 
 export const changeResultsVisibility = isVisible => dispatch =>
   dispatch(_changeResultsVisibility(isVisible));
@@ -49,12 +59,18 @@ function _changeSearchTerm(searchTerm) {
   return { type: CHANGE_SEARCH_TERM, searchTerm };
 }
 
-export const fetchResult = (term, rows = 50, offset = 0) => dispatch => {
+export const fetchResult = (
+  term,
+  rows = 50,
+  offset = 0,
+  filters
+) => dispatch => {
   dispatch(_fetchResult());
   const params = {
     search: term,
     rows,
-    offset
+    offset,
+    filters
   };
   ApiHelper.search(params).then(res => {
     if (res && res["status-code"] === 1) {

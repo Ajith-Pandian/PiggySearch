@@ -23,7 +23,7 @@ export const RISKS = { name: "Risks", value: "risks", children: RISKS_PARAMS };
 // SUB CATEGORIES
 export const SUB_CATEGORIES = {
   name: "Sub Categories",
-  value: "sub_categories"
+  value: "sub_category_filters"
 };
 
 //----SUB CATEGORIES----//

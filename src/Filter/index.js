@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { connect } from "react-redux";
+
 import { TabNavigator } from "react-navigation";
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 import Button from "../Components/Button";
 import BasicFilters from "./BasicFilters";
 import AdvanceFilters from "./AdvanceFilters";
+import { applyFilters } from "../Store/Actions/FillerActions";
 
 const FilterTabs = TabNavigator(
   {
@@ -23,8 +26,9 @@ const FilterTabs = TabNavigator(
     }
   }
 );
-export default class FilterPage extends Component {
+class FilterPage extends Component {
   render() {
+    let { filters, _applyFilters } = this.props;
     return (
       <View
         style={{
@@ -41,13 +45,12 @@ export default class FilterPage extends Component {
             width: "98%"
           }}
           textStyle={{}}
-          onPress={() => {}}
+          onPress={() => _applyFilters(filters)}
         />
       </View>
     );
   }
 }
-
 FilterPage.navigationOptions = {
   title: "Filters",
   headerTintColor: "white",
@@ -70,6 +73,14 @@ FilterPage.navigationOptions = {
     />
   )
 };
+const mapStateToProps = ({ FilterReducer }) => {
+  let { filters } = FilterReducer;
+  return { filters };
+};
+const mapDispatchToProps = (dispatch, props) => ({
+  _applyFilters: filters => dispatch(applyFilters(filters))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPage);
 
 const styles = StyleSheet.create({
   container: {

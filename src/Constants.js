@@ -181,7 +181,6 @@ export const MINIMUM_INVESTMENTS_PARAMS = {
   MORE_THAN_THOUSAND
 };
 // FUND HOUSE NAMES
-export const AMC = { name: "amc", value: "fund_house_names" };
 
 const IDFC_MUTUAL_FUND = {
   name: "IDFC Mutual Fund",
@@ -207,7 +206,10 @@ const RELIANCE_MUTUAL_FUND = {
   name: "Reliance Mutual Fund",
   value: "reliance_mutual_fund"
 };
-const SBI_MUTUAL_FUND = { name: "sbi Mutual Fund", value: "sbi_mutual_fund" };
+const SBI_MUTUAL_FUND = {
+  name: "SBI Mutual Fund",
+  value: "sbi_mutual_fund"
+};
 const AXIS_ASSET_MUTUAL_FUND = {
   name: "Axis Asset Mutual Fund",
   value: "axis_asset_mutual_fund"
@@ -221,17 +223,20 @@ const DSP_BLACKROCK_MUTUAL_FUND = {
   value: "dsp_blackrock_mutual_fund"
 };
 
-export const AMC_PARAMS = {
-  IDFC_MUTUAL_FUND,
-  KOTAK_MAHINDRA_MUTUAL_FUND,
-  BIRLA_SUN_LIFE_MUTUAL_FUND,
-  DHFL_PRAMERICA_MUTUAL_FUND,
-  HDFC_MUTUAL_FUND,
-  RELIANCE_MUTUAL_FUND,
-  SBI_MUTUAL_FUND,
-  AXIS_ASSET_MUTUAL_FUND,
-  CANARA_ROBECO_MUTUAL_FUND,
-  DSP_BLACKROCK_MUTUAL_FUND
+export const FUND_HOUSES = {
+  name: "Fund Category",
+  value: [
+    IDFC_MUTUAL_FUND,
+    KOTAK_MAHINDRA_MUTUAL_FUND,
+    BIRLA_SUN_LIFE_MUTUAL_FUND,
+    DHFL_PRAMERICA_MUTUAL_FUND,
+    HDFC_MUTUAL_FUND,
+    RELIANCE_MUTUAL_FUND,
+    SBI_MUTUAL_FUND,
+    AXIS_ASSET_MUTUAL_FUND,
+    CANARA_ROBECO_MUTUAL_FUND,
+    DSP_BLACKROCK_MUTUAL_FUND
+  ]
 };
 
 // PLAN TYPE

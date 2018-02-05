@@ -18,8 +18,7 @@ import {
   MINIMUM_INVESTMENTS_PARAMS,
   PLAN_TYPE,
   PLAN_TYPE_PARAMS,
-  AMC,
-  AMC_PARAMS,
+  FUND_HOUSES,
   SUB_CATEGORIES,
   COMMODITIES,
   COMMODITIES_PARAMS,
@@ -56,7 +55,7 @@ const initialState = {
     [CATEGORIES.name]: addActiveToChildren(CATEGORY_PARAMS),
     [MINIMUM_INVESTMENTS.name]: addActiveToChildren(MINIMUM_INVESTMENTS_PARAMS),
     [PLAN_TYPE.name]: addActiveToChildren(PLAN_TYPE_PARAMS),
-    [AMC.name]: addActiveToChildren(AMC_PARAMS)
+    [FUND_HOUSES.name]: addActiveToChildren(FUND_HOUSES.value)
     //[SUB_CATEGORIES.name]: subCategories
   }
 };

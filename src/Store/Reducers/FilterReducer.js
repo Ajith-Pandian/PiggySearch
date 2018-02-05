@@ -31,15 +31,12 @@ import {
 } from "../../Constants";
 import { arrayToObject } from "../../Utils";
 
-const addParam = (obj, param) => ({ ...obj, [param.name]: param.value });
-
-const addParamToChildren = (arr, param) =>
-  arrayToObject(Object.keys(arr).map(key => addParam(arr[key], param)));
-
-const addActiveToChildren = obj =>
-  addParamToChildren(obj, { name: "active", value: false });
-
 const addActiveToArray = arr => arr.map(item => ({ ...item, active: false }));
+
+const addActiveToArrayChild = arr =>
+  arr.map(item => ({ ...item, children: addActiveToArray(item.children) }));
+
+const categories = {};
 
 const initialState = {
   isResultsVisible: false,

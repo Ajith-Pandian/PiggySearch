@@ -7,7 +7,7 @@ import Button from "../Components/Button";
 import CheckBox from "../Components/CheckBox";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
-class BasicFilter extends Component {
+class AdvanceFilter extends Component {
   render() {
     let { _changeFilter } = this.props;
     return (
@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   _changeFilter: (filterName, childName, isActive) =>
     dispatch(changeFilter(filterName, childName, isActive))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(BasicFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(AdvanceFilter);
 
 const styles = StyleSheet.create({
   container: {

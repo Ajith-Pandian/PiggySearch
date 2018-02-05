@@ -1,31 +1,24 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {
-  PRIMARY,
-  PINK,
-  BG_COLOR,
-  SUB_CATEGORY_PARAMS as data,
-  CATEGORY_PARAMS as categoryNames
-} from "../Constants";
+import { connect } from "react-redux";
+import { PRIMARY, PINK, BG_COLOR, CATEGORIES } from "../Constants";
 
 import CheckBox from "../Components/CheckBox";
 import RoundedButton from "../Components/RoundedButton";
 
 import Accordion from "react-native-collapsible/Accordion";
 
-let dataArray = Object.keys(data).map(val => data[val]);
-
-export default class FundCategory extends Component {
+class FundCategory extends Component {
   render() {
     return (
       <View style={{}}>
         <Text
           style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
         >
-          FundCategory
+          Fund Category
         </Text>
         <Accordion
-          sections={dataArray}
+          sections={CATEGORIES.children}
           renderHeader={(section, i, isActive) => {
             return (
               <CheckBox
@@ -50,7 +43,7 @@ export default class FundCategory extends Component {
                   padding: 10
                 }}
               >
-                {section.value.map((item, index) => {
+                {section.children.map((item, index) => {
                   return (
                     <RoundedButton
                       key={index}
@@ -67,6 +60,16 @@ export default class FundCategory extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ FilterReducer }) => {
+  let { filter, isResultsVisible } = FilterReducer;
+  return { filter, isResultsVisible };
+};
+const mapDispatchToProps = (dispatch, props) => ({
+  _changeFilter: (filterName, childName, isActive) =>
+    dispatch(changeFilter(filterName, childName, isActive))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(FundCategory);
 
 const styles = StyleSheet.create({
   container: {

@@ -20,21 +20,6 @@ const RISKS_PARAMS = [LOW, MODERATELY_LOW, MODERATE, MODERATELY_HIGH, HIGH];
 
 export const RISKS = { name: "Risks", value: "risks", children: RISKS_PARAMS };
 
-// CATEGORIES
-
-export const COMMODITIES = { name: "Commodities", value: "commodities" };
-export const DEBT = { name: "Debt", value: "debt" };
-export const EQUITY = { name: "Equity", value: "equity" };
-export const HYBRID = { name: "Hybrid", value: "hybrid" };
-
-const CATEGORY_PARAMS = [COMMODITIES, DEBT, HYBRID, EQUITY];
-
-export const CATEGORIES = {
-  name: "Categories",
-  value: "categories",
-  children: CATEGORY_PARAMS
-};
-
 // SUB CATEGORIES
 export const SUB_CATEGORIES = {
   name: "Sub Categories",
@@ -150,11 +135,31 @@ export const HYBRID_PARAMS = [
   MIP_AGGRESSIVE
 ];
 
-export const SUB_CATEGORY_PARAMS = {
-  [COMMODITIES.name]: { name: COMMODITIES.name, value: COMMODITIES_PARAMS },
-  [DEBT.name]: { name: DEBT.name, value: DEBT_PARAMS },
-  [EQUITY.name]: { name: EQUITY.name, value: EQUITY_PARAMS },
-  [HYBRID.name]: { name: HYBRID.name, value: HYBRID_PARAMS }
+// CATEGORIES
+
+export const COMMODITIES = {
+  name: "Commodities",
+  value: "commodities",
+  children: COMMODITIES_PARAMS
+};
+export const DEBT = { name: "Debt", value: "debt", children: DEBT_PARAMS };
+export const EQUITY = {
+  name: "Equity",
+  value: "equity",
+  children: EQUITY_PARAMS
+};
+export const HYBRID = {
+  name: "Hybrid",
+  value: "hybrid",
+  children: HYBRID_PARAMS
+};
+
+const CATEGORY_PARAMS = [COMMODITIES, DEBT, HYBRID, EQUITY];
+
+export const CATEGORIES = {
+  name: "Categories",
+  value: "categories",
+  children: CATEGORY_PARAMS
 };
 
 // MINIMUM_INVESTMENTS
@@ -233,7 +238,7 @@ const FUND_HOUSE_PARAMS = [
 ];
 export const FUND_HOUSES = {
   name: "Fund Category",
-  value: "amc",
+  value: "fund_house_names",
   children: FUND_HOUSE_PARAMS
 };
 

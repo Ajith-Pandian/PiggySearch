@@ -5,7 +5,11 @@ import StepSlider from "./StepSlider";
 import { PINK, PINK_DARK } from "../Constants";
 
 export default class RoundedButton extends Component {
-  state = { isActive: false };
+  constructor(props) {
+    super(props);
+    let { isActive = false } = props;
+    this.state = { isActive };
+  }
   render() {
     let { text, onPress, style, textStyle } = this.props;
     let { isActive } = this.state;

@@ -7,7 +7,7 @@ import { changeFilter } from "../Store/Actions/FillerActions";
 
 class Category extends Component {
   render() {
-    let { _changeFilter } = this.props;
+    let { categories, _changeFilter } = this.props;
     return (
       <View style={{}}>
         <Text
@@ -24,14 +24,15 @@ class Category extends Component {
             backgroundColor: PRIMARY
           }}
         >
-          {CATEGORIES.children.map((item, index) => {
-            const categoryName = item.name;
+          {categories.map((item, index) => {
+            const { name, active } = item;
             return (
               <RoundedButton
                 key={index}
-                text={categoryName}
+                isActive={active}
+                text={name}
                 onPress={isActive =>
-                  _changeFilter(CATEGORIES.name, categoryName, isActive)
+                  _changeFilter(CATEGORIES.name, name, isActive)
                 }
               />
             );
@@ -43,8 +44,8 @@ class Category extends Component {
 }
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter, isResultsVisible } = FilterReducer;
-  return { filter, isResultsVisible };
+  let { filters, isResultsVisible } = FilterReducer;
+  return { categories: filters[CATEGORIES.name], isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeFilter: (filterName, childName, isActive) =>

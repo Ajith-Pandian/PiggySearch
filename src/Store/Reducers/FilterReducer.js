@@ -1,6 +1,7 @@
 import {
   CHANGE_FILTER_STATE,
   CHANGE_AMOUNT_FILTER_STATE,
+  CHANGE_PLAN_FILTER_STATE,
   CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
   FETCH_RESULT,
@@ -83,12 +84,23 @@ export default function Filters(state = initialState, action) {
     }
     case CHANGE_AMOUNT_FILTER_STATE: {
       let { childName, isActive } = action;
-      const newInvestmentsState = MINIMUM_INVESTMENTS.children.map(item => {
+      const newState = MINIMUM_INVESTMENTS.children.map(item => {
         return { ...item, active: item.name === childName };
       });
       return update(state, {
         filters: {
-          [MINIMUM_INVESTMENTS.name]: { $set: newInvestmentsState }
+          [MINIMUM_INVESTMENTS.name]: { $set: newState }
+        }
+      });
+    }
+    case CHANGE_PLAN_FILTER_STATE: {
+      let { childName, isActive } = action;
+      const newState = PLAN_TYPES.children.map(item => {
+        return { ...item, active: item.name === childName };
+      });
+      return update(state, {
+        filters: {
+          [PLAN_TYPES.name]: { $set: newState }
         }
       });
     }

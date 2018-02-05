@@ -7,7 +7,7 @@ import { changeFilter } from "../Store/Actions/FillerActions";
 
 class RiskChooser extends Component {
   render() {
-    let { _changeFilter } = this.props;
+    let { risks, _changeFilter } = this.props;
     return (
       <View style={{}}>
         <Text
@@ -16,15 +16,16 @@ class RiskChooser extends Component {
           {RISKS.name}
         </Text>
         <View style={styles.container}>
-          {RISKS.children.map((item, index) => {
-            const riskName = item.name;
+          {risks.map((item, index) => {
+            let { name, active } = item;
             return (
               <CheckBox
                 key={index}
-                text={riskName}
+                isActive={active}
+                text={name}
                 style={{ width: "50%", height: 50 }}
                 onChange={isActive => {
-                  _changeFilter(RISKS.name, riskName, isActive);
+                  _changeFilter(RISKS.name, name, isActive);
                 }}
               />
             );
@@ -35,8 +36,8 @@ class RiskChooser extends Component {
   }
 }
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter, isResultsVisible } = FilterReducer;
-  return { filter, isResultsVisible };
+  let { filters, isResultsVisible } = FilterReducer;
+  return { risks: filters[RISKS.name], isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeFilter: (filterName, childName, isActive) =>

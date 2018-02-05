@@ -10,7 +10,7 @@ import Accordion from "react-native-collapsible/Accordion";
 import { changeSubFilter } from "../Store/Actions/FillerActions";
 class FundCategory extends Component {
   render() {
-    let { _changeSubFilter } = this.props;
+    let { subCategories, _changeSubFilter } = this.props;
     return (
       <View style={{}}>
         <Text
@@ -19,15 +19,16 @@ class FundCategory extends Component {
           Fund Category
         </Text>
         <Accordion
-          sections={CATEGORIES.children}
+          sections={subCategories}
           touchableComponent={TouchableOpacity}
           renderHeader={(section, i, isActive) => {
+            let { name, active } = section;
             return (
               <View>
                 <CheckBox
                   key={i}
-                  isChecked={isActive}
-                  text={section.name}
+                  isChecked={active}
+                  text={name}
                   disabled={true}
                   style={{
                     height: 50,
@@ -36,13 +37,14 @@ class FundCategory extends Component {
                   onChange={() => {}}
                 />
                 {section.children.map((item, index) => {
-                  const subName = item.name;
+                  let { name, active } = item;
                   return (
                     <RoundedButton
                       key={index}
-                      text={subName}
+                      isActive={active}
+                      text={name}
                       onPress={isActive =>
-                        _changeSubFilter(section.name, subName, isActive)
+                        _changeSubFilter(section.name, name, isActive)
                       }
                     />
                   );
@@ -60,13 +62,14 @@ class FundCategory extends Component {
                 }}
               >
                 {section.children.map((item, index) => {
-                  const subName = item.name;
+                  let { name, active } = section;
                   return (
                     <RoundedButton
+                      isActive={active}
                       key={index}
-                      text={subName}
+                      text={name}
                       onPress={isActive =>
-                        _changeSubFilter(section.name, subName, isActive)
+                        _changeSubFilter(section.name, name, isActive)
                       }
                     />
                   );
@@ -81,8 +84,8 @@ class FundCategory extends Component {
 }
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter, isResultsVisible } = FilterReducer;
-  return { filter, isResultsVisible };
+  let { filters, isResultsVisible } = FilterReducer;
+  return { subCategories: filters[CATEGORIES.name], isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeSubFilter: (parentName, childName, isActive) =>

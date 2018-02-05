@@ -7,13 +7,11 @@ import CheckBox from "../Components/CheckBox";
 import RoundedButton from "../Components/RoundedButton";
 import RadioGroup from "../Components/RadioGroup";
 
-let radio_props = [
-  { label: "param1", value: 0 },
-  { label: "param2", value: 1 }
-];
+import { changePlanFilter } from "../Store/Actions/FillerActions";
 
 class PlanType extends Component {
   render() {
+    let { planTypes, _changePlanFilter } = this.props;
     return (
       <View style={{}}>
         <Text
@@ -27,7 +25,8 @@ class PlanType extends Component {
             marginHorizontal: 10,
             paddingVertical: 5
           }}
-          values={PLAN_TYPES.children}
+          values={planTypes}
+          onChange={({ name, isActive }) => _changePlanFilter(name, isActive)}
         />
       </View>
     );
@@ -35,12 +34,12 @@ class PlanType extends Component {
 }
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter, isResultsVisible } = FilterReducer;
-  return { filter, isResultsVisible };
+  let { filters, isResultsVisible } = FilterReducer;
+  return { planTypes: filters[PLAN_TYPES.name], isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
-  _changeFilter: (filterName, childName, isActive) =>
-    dispatch(changeFilter(filterName, childName, isActive))
+  _changePlanFilter: (childName, isActive) =>
+    dispatch(changePlanFilter(childName, isActive))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PlanType);
 

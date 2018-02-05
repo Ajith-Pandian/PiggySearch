@@ -182,6 +182,7 @@ export const MINIMUM_INVESTMENTS = {
   children: MINIMUM_INVESTMENTS_PARAMS,
   default: MORE_THAN_THOUSAND.name
 };
+
 // FUND HOUSE NAMES
 
 const IDFC_MUTUAL_FUND = {

@@ -9,7 +9,7 @@ import { changeFilter } from "../Store/Actions/FillerActions";
 
 class AdvanceFilter extends Component {
   render() {
-    let { _changeFilter } = this.props;
+    let { fundHouses, _changeFilter } = this.props;
     return (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
         <Text
@@ -17,16 +17,17 @@ class AdvanceFilter extends Component {
         >
           {FUND_HOUSES.name}
         </Text>
-        {FUND_HOUSES.children.map((item, index) => {
+        {fundHouses.map((item, index) => {
           const houseName = item.name;
+          let { name, active } = item;
           return (
             <CheckBox
               key={index}
-              isChecked={false}
-              text={houseName}
+              isChecked={active}
+              text={name}
               style={{ height: 50, marginVertical: 1 }}
               onChange={isActive =>
-                _changeFilter(FUND_HOUSES.name, houseName, isActive)
+                _changeFilter(FUND_HOUSES.name, name, isActive)
               }
             />
           );
@@ -37,8 +38,8 @@ class AdvanceFilter extends Component {
 }
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter, isResultsVisible } = FilterReducer;
-  return { filter, isResultsVisible };
+  let { filters, isResultsVisible } = FilterReducer;
+  return { fundHouses: filters[FUND_HOUSES.name], isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeFilter: (filterName, childName, isActive) =>

@@ -5,7 +5,9 @@ import { PRIMARY, MINIMUM_INVESTMENTS } from "../Constants";
 import { connect } from "react-redux";
 import { changeAmountFilter } from "../Store/Actions/FillerActions";
 import { arrayToObject } from "../Utils";
-const AmountChooser = ({ _changeAmountFilter }) => {
+const AmountChooser = ({ minInvestments, _changeAmountFilter }) => {
+  const steps = minInvestments.length;
+  let startStep = minInvestments.findIndex(item => item.active) + 1;
   return (
     <View>
       <Text
@@ -22,9 +24,10 @@ const AmountChooser = ({ _changeAmountFilter }) => {
         }}
       >
         <StepSlider
-          steps={4}
+          steps={steps}
+          startStep={startStep}
           onSelect={val => {
-            _changeAmountFilter(MINIMUM_INVESTMENTS.children[val].name, true);
+            _changeAmountFilter(minInvestments[val].name, true);
           }}
         />
         <View
@@ -33,7 +36,7 @@ const AmountChooser = ({ _changeAmountFilter }) => {
             justifyContent: "space-between"
           }}
         >
-          {MINIMUM_INVESTMENTS.children.map((item, index) => {
+          {minInvestments.map((item, index) => {
             return (
               <Text key={index} style={{ color: "white" }}>
                 {item.name}
@@ -46,8 +49,11 @@ const AmountChooser = ({ _changeAmountFilter }) => {
   );
 };
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filter, isResultsVisible } = FilterReducer;
-  return { filter, isResultsVisible };
+  let { filters, isResultsVisible } = FilterReducer;
+  return {
+    minInvestments: filters[MINIMUM_INVESTMENTS.name],
+    isResultsVisible
+  };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeAmountFilter: (childName, isActive) =>

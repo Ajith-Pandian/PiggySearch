@@ -11,7 +11,9 @@ const MIN = 0,
 export default class StepSlider extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: 0 };
+    let { startStep, steps } = props;
+    let stepValue = (MAX - MIN) / steps;
+    this.state = { value: startStep * stepValue || 0 };
   }
   calculateStep = () => {
     let { value: slideValue } = this.state;

@@ -1,6 +1,7 @@
 import {
   CHANGE_FILTER_STATE,
   CHANGE_AMOUNT_FILTER_STATE,
+  CHANGE_PLAN_FILTER_STATE,
   CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
   FETCH_RESULT,
@@ -21,6 +22,12 @@ export const changeAmountFilter = (childName, isActive) => dispatch =>
 
 function _changeAmountFilter(childName, isActive) {
   return { type: CHANGE_AMOUNT_FILTER_STATE, childName, isActive };
+}
+export const changePlanFilter = (childName, isActive) => dispatch =>
+  dispatch(_changePlanFilter(childName, isActive));
+
+function _changePlanFilter(childName, isActive) {
+  return { type: CHANGE_PLAN_FILTER_STATE, childName, isActive };
 }
 export const changeSubFilter = (parentName, childName, isActive) => dispatch =>
   dispatch(_changeSubFilter(parentName, childName, isActive));

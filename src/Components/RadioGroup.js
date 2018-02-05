@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-
 const Radio = props => {
   return (
     <View
@@ -67,16 +66,17 @@ class RadioGroup extends Component {
   constructor(props) {
     super(props);
     let { values } = props;
-    values = values.map(item => ({ ...item, isActive: false }));
+    values = values.map(item => ({ ...item, isActive: item.active || false }));
     this.state = { initialValues: values, values };
   }
   handleRadioChange = (index, isActive) => {
     let { initialValues } = this.state;
+    const { onChange } = this.props;
     let values = initialValues.map((item, i) => ({
       ...item,
       isActive: i === index
     }));
-    this.setState({ values });
+    this.setState({ values }, () => onChange(this.state.values[index]));
   };
   render() {
     let { style, buttonStyle } = this.props;

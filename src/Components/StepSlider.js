@@ -8,12 +8,26 @@ import Slider from "react-native-slider";
 const MIN = 0,
   MAX = 100;
 
+const getStepValue = (startStep, steps) => {
+  let stepValue = (MAX - MIN) / (steps - 1);
+  let value = startStep * stepValue || 0;
+  return value;
+};
+
 export default class StepSlider extends Component {
   constructor(props) {
     super(props);
     let { startStep, steps } = props;
-    let stepValue = (MAX - MIN) / steps;
-    this.state = { value: startStep * stepValue || 0 };
+    let value = getStepValue(startStep, steps);
+    this.state = { value };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let { startStep, steps } = nextProps;
+    let value = getStepValue(startStep, steps);
+    this.setState(prevState => ({
+      value
+    }));
   }
   calculateStep = () => {
     let { value: slideValue } = this.state;

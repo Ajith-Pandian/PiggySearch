@@ -1,6 +1,7 @@
 import {
   CHANGE_FILTER_STATE,
   CHANGE_AMOUNT_FILTER_STATE,
+  CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
@@ -20,6 +21,12 @@ export const changeAmountFilter = (childName, isActive) => dispatch =>
 
 function _changeAmountFilter(childName, isActive) {
   return { type: CHANGE_AMOUNT_FILTER_STATE, childName, isActive };
+}
+export const changeSubFilter = (parentName, childName, isActive) => dispatch =>
+  dispatch(_changeSubFilter(parentName, childName, isActive));
+
+function _changeSubFilter(parentName, childName, isActive) {
+  return { type: CHANGE_SUB_FILTER_STATE, parentName, childName, isActive };
 }
 
 export const changeResultsVisibility = isVisible => dispatch =>

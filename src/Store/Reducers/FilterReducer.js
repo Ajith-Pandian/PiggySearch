@@ -1,6 +1,7 @@
 import {
   CHANGE_FILTER_STATE,
   CHANGE_AMOUNT_FILTER_STATE,
+  CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
@@ -33,7 +34,7 @@ import { arrayToObject } from "../../Utils";
 
 const addActiveToArray = arr => arr.map(item => ({ ...item, active: false }));
 
-const addActiveToArrayChild = arr =>
+const addActiveToChildArray = arr =>
   arr.map(item => ({ ...item, children: addActiveToArray(item.children) }));
 
 const categories = {};
@@ -46,7 +47,7 @@ const initialState = {
   offset: 0,
   filters: {
     [RISKS.name]: addActiveToArray(RISKS.children),
-    [CATEGORIES.name]: addActiveToArray(CATEGORIES.children),
+    [CATEGORIES.name]: addActiveToChildArray(CATEGORIES.children),
     [MINIMUM_INVESTMENTS.name]: addActiveToArray(MINIMUM_INVESTMENTS.children),
     [PLAN_TYPES.name]: addActiveToArray(PLAN_TYPES.children),
     [FUND_HOUSES.name]: addActiveToArray(FUND_HOUSES.children)
@@ -79,6 +80,26 @@ export default function Filters(state = initialState, action) {
       return update(state, {
         filters: {
           [MINIMUM_INVESTMENTS.name]: { $set: newInvestmentsState }
+        }
+      });
+    }
+    case CHANGE_SUB_FILTER_STATE: {
+      let { parentName, childName, isActive } = action;
+      let parentIndex = state.filters[CATEGORIES.name].findIndex(
+        item => item.name === parentName
+      );
+      let index = state.filters[CATEGORIES.name][
+        parentIndex
+      ].children.findIndex(item => item.name === childName);
+      return update(state, {
+        filters: {
+          [CATEGORIES.name]: {
+            [parentIndex]: {
+              children: {
+                [index]: { active: { $set: isActive } }
+              }
+            }
+          }
         }
       });
     }

@@ -4,6 +4,7 @@ import {
   CHANGE_PLAN_FILTER_STATE,
   CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
+  RESET_FILTERS,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
   FETCH_RESULT_FAILURE,
@@ -144,6 +145,9 @@ export default function Filters(state = initialState, action) {
     }
     case FETCH_RESULT_FAILURE: {
       return { ...state, isLoading: false, isSuccess: false, isError: true };
+    }
+    case RESET_FILTERS: {
+      return initialState;
     }
 
     default:

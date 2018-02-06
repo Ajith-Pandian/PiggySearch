@@ -24,32 +24,17 @@ class FundCategory extends Component {
           renderHeader={(section, i, isActive) => {
             let { name, active } = section;
             return (
-              <View>
-                <CheckBox
-                  key={i}
-                  isChecked={active}
-                  text={name}
-                  disabled={true}
-                  style={{
-                    height: 50,
-                    marginHorizontal: 10
-                  }}
-                  onChange={() => {}}
-                />
-                {section.children.map((item, index) => {
-                  let { name, active } = item;
-                  return (
-                    <RoundedButton
-                      key={index}
-                      isActive={active}
-                      text={name}
-                      onPress={isActive =>
-                        _changeSubFilter(section.name, name, isActive)
-                      }
-                    />
-                  );
-                })}
-              </View>
+              <CheckBox
+                key={i}
+                isChecked={active}
+                text={name}
+                disabled={true}
+                style={{
+                  height: 50,
+                  marginHorizontal: 10
+                }}
+                onChange={() => {}}
+              />
             );
           }}
           renderContent={(section, i, isActive) => {
@@ -62,11 +47,11 @@ class FundCategory extends Component {
                 }}
               >
                 {section.children.map((item, index) => {
-                  let { name, active } = section;
+                  let { name, active } = item;
                   return (
                     <RoundedButton
-                      isActive={active}
                       key={index}
+                      isActive={active}
                       text={name}
                       onPress={isActive =>
                         _changeSubFilter(section.name, name, isActive)

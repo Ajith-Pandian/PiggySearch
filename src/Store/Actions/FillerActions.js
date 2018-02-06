@@ -4,7 +4,7 @@ import {
   CHANGE_PLAN_FILTER_STATE,
   CHANGE_SUB_FILTER_STATE,
   CHANGE_SEARCH_TERM,
-  APPLY_FILTERS,
+  RESET_FILTERS,
   FETCH_RESULT,
   FETCH_RESULT_SUCCESS,
   FETCH_RESULT_FAILURE,
@@ -36,14 +36,11 @@ export const changeSubFilter = (parentName, childName, isActive) => dispatch =>
 function _changeSubFilter(parentName, childName, isActive) {
   return { type: CHANGE_SUB_FILTER_STATE, parentName, childName, isActive };
 }
-export const applyFilters = () => (dispatch, getState) => {
-  let { searchTerm, rows, offset, filters } = getState().FilterReducer;
-  let apiFilters = getApiFilters(filters);
-  dispatch(fetchResult(searchTerm, rows, offset, filters));
-};
 
-function _applyFilters(apiFilters) {
-  return { type: APPLY_FILTERS, apiFilters };
+export const resetFilters = () => dispatch => dispatch(_resetFilters());
+
+function _resetFilters() {
+  return { type: RESET_FILTERS };
 }
 
 export const changeResultsVisibility = isVisible => dispatch =>
@@ -59,15 +56,12 @@ function _changeSearchTerm(searchTerm) {
   return { type: CHANGE_SEARCH_TERM, searchTerm };
 }
 
-export const fetchResult = (
-  term,
-  rows = 50,
-  offset = 0,
-  filters
-) => dispatch => {
+export const fetchResult = () => (dispatch, getState) => {
+  let { searchTerm: search, rows, offset, filters } = getState().FilterReducer;
+  filters = getApiFilters(filters);
   dispatch(_fetchResult());
   const params = {
-    search: term,
+    search,
     rows,
     offset,
     filters

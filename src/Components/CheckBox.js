@@ -8,13 +8,7 @@ class CheckBox extends Component {
     this.state = { checked: props.checked };
   }
   render() {
-    let {
-      text,
-      style,
-      onChange,
-      disabled = false,
-      isChecked = false
-    } = this.props;
+    let { text, style, onChange, disabled = false } = this.props;
     let { checked } = this.state;
     return (
       <Check
@@ -35,7 +29,7 @@ class CheckBox extends Component {
             () => onChange(this.state.checked)
           )
         }
-        isChecked={isChecked}
+        isChecked={checked}
         leftText={text}
       />
     );

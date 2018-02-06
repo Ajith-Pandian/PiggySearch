@@ -12,6 +12,7 @@ import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 const Button = ({ text, onPress, style, textStyle, isBottom }) => {
   return (
     <TouchableOpacity
+      activeOpacity={0.8}
       onPress={() => onPress()}
       style={[
         {

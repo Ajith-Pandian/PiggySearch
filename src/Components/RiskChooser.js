@@ -21,7 +21,7 @@ class RiskChooser extends Component {
             return (
               <CheckBox
                 key={index}
-                isActive={active}
+                checked={active}
                 text={name}
                 style={{ width: "50%", height: 50 }}
                 onChange={isActive => {

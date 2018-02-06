@@ -5,15 +5,18 @@ import { PRIMARY } from "../Constants";
 import {
   fetchResult,
   changeSearchTerm,
-  changeResultsVisibility
+  changeResultsVisibility,
+  resetFilters
 } from "../Store/Actions/FillerActions";
+
 const Header = ({
   onChangeText,
   searchTerm,
   isResultsVisible,
   _fetchResult,
   _changeSearchTerm,
-  _changeResultsVisibility
+  _changeResultsVisibility,
+  _resetFilters
 }) => {
   return (
     <View
@@ -31,7 +34,10 @@ const Header = ({
     >
       {isResultsVisible ? (
         <TouchableOpacity
-          onPress={() => _changeResultsVisibility(false)}
+          onPress={() => {
+            _resetFilters();
+            _changeResultsVisibility(false);
+          }}
           style={{
             marginLeft: 20,
             marginVertical: 10,
@@ -55,8 +61,10 @@ const Header = ({
           paddingHorizontal: 10
         }}
         onChangeText={text => _changeSearchTerm(text)}
+        value={searchTerm}
         placeholder={"Search"}
         returnKeyType={"search"}
+        underlineColorAndroid={"transparent"}
         onSubmitEditing={() => _fetchResult(searchTerm)}
       />
     </View>
@@ -71,6 +79,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   _fetchResult: searchTerm => dispatch(fetchResult(searchTerm)),
   _changeSearchTerm: text => dispatch(changeSearchTerm(text)),
   _changeResultsVisibility: isVisible =>
-    dispatch(changeResultsVisibility(isVisible))
+    dispatch(changeResultsVisibility(isVisible)),
+  _resetFilters: () => dispatch(resetFilters())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -117,7 +117,11 @@ class Results extends Component {
             keyExtractor={item => item.id}
           />
         ) : (
-          <Text>No Results</Text>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <Text style={{ color: "white" }}>No Results</Text>
+          </View>
         )}
       </View>
     );

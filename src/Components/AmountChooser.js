@@ -35,12 +35,16 @@ class AmountChooser extends Component {
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
+              paddingHorizontal: 10
             }}
           >
             {minInvestments.map((item, index) => {
               return (
-                <Text key={index} style={{ color: "white" }}>
+                <Text
+                  key={index}
+                  style={{ color: "white", textAlign: "center" }}
+                >
                   {item.name}
                 </Text>
               );

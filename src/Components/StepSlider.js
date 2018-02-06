@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    margin: 10
+    marginVertical: 20,
+    marginHorizontal: 25
   }
 });

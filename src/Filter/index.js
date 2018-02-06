@@ -7,7 +7,7 @@ import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 import Button from "../Components/Button";
 import BasicFilters from "./BasicFilters";
 import AdvanceFilters from "./AdvanceFilters";
-import { applyFilters } from "../Store/Actions/FillerActions";
+import { fetchResult, resetFilters } from "../Store/Actions/FillerActions";
 
 const FilterTabs = TabNavigator(
   {
@@ -28,7 +28,7 @@ const FilterTabs = TabNavigator(
 );
 class FilterPage extends Component {
   render() {
-    let { filters, _applyFilters } = this.props;
+    let { _fetchResult, navigation } = this.props;
     return (
       <View
         style={{
@@ -45,12 +45,24 @@ class FilterPage extends Component {
             width: "98%"
           }}
           textStyle={{}}
-          onPress={() => _applyFilters(filters)}
+          onPress={() => {
+            _fetchResult();
+            navigation.goBack();
+          }}
         />
       </View>
     );
   }
 }
+const ResetButton = ({ dispatch }) => (
+  <Button
+    text={"RESET"}
+    style={{ backgroundColor: "transparent", marginHorizontal: 10 }}
+    textStyle={{ color: PINK }}
+    onPress={() => dispatch(resetFilters())}
+  />
+);
+const Reset = connect()(ResetButton);
 FilterPage.navigationOptions = {
   title: "Filters",
   headerTintColor: "white",
@@ -64,21 +76,14 @@ FilterPage.navigationOptions = {
     elevation: 0
   },
 
-  headerRight: (
-    <Button
-      text={"RESET"}
-      style={{ backgroundColor: "transparent", marginHorizontal: 10 }}
-      textStyle={{ color: PINK }}
-      onPress={() => {}}
-    />
-  )
+  headerRight: <Reset />
 };
 const mapStateToProps = ({ FilterReducer }) => {
   let { filters } = FilterReducer;
   return { filters };
 };
 const mapDispatchToProps = (dispatch, props) => ({
-  _applyFilters: filters => dispatch(applyFilters(filters))
+  _fetchResult: filters => dispatch(fetchResult())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPage);
 

@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 
-import Header from "./Header";
 import AmountChooser from "../Components/AmountChooser";
 import RoundedButton from "../Components/RoundedButton";
 import Button from "../Components/Button";
 import Category from "../Components/Category";
+import Header from "../Components/Header";
 import Results from "./ResultsPage";
 
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";

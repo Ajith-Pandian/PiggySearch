@@ -257,3 +257,13 @@ export const PLAN_TYPES = {
   children: PLAN_TYPE_PARAMS,
   default: DIRECT_PLAN.name
 };
+
+export const SORT_ITEMS = [
+  "1yr return",
+  "3yr Avg return",
+  "Return Since Beginning",
+  "Highest AUM",
+  "Most consistent Returns",
+  "Highest Return per Risk",
+  "Expense ratio"
+];

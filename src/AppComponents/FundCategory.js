@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { connect } from "react-redux";
-import { PRIMARY, PINK, BG_COLOR, CATEGORIES } from "../Constants";
-
-import CheckBox from "../Components/CheckBox";
-import RoundedButton from "../Components/RoundedButton";
-
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
+import { connect } from "react-redux";
+
+import { Text, CheckBox, RoundedButton } from "../Components";
+
+import { PRIMARY, PINK, BG_COLOR, CATEGORIES } from "../Constants";
 import { changeSubFilter } from "../Store/Actions/FillerActions";
+
 class FundCategory extends Component {
   render() {
     let { subCategories, _changeSubFilter } = this.props;

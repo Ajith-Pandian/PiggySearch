@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 
 import StepSlider from "./StepSlider";
+import Text from "./Text";
+
 import { PINK, PINK_DARK } from "../Constants";
 
 export default class RoundedButton extends Component {

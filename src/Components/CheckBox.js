@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Check from "react-native-check-box";
+
 import { PRIMARY } from "../Constants";
 
 class CheckBox extends Component {

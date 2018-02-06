@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
-import StepSlider from "./StepSlider";
-import { PRIMARY, MINIMUM_INVESTMENTS } from "../Constants";
+import { View } from "react-native";
 import { connect } from "react-redux";
-import { changeAmountFilter } from "../Store/Actions/FillerActions";
+
+import { Text, StepSlider } from "../Components";
+
 import { arrayToObject } from "../Utils";
+import { PRIMARY, MINIMUM_INVESTMENTS } from "../Constants";
+import { changeAmountFilter } from "../Store/Actions/FillerActions";
+
 class AmountChooser extends Component {
   render() {
     let { minInvestments, _changeAmountFilter } = this.props;
@@ -12,9 +15,7 @@ class AmountChooser extends Component {
     let startStep = minInvestments.findIndex(item => item.active);
     return (
       <View>
-        <Text
-          style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
-        >
+        <Text style={{ marginHorizontal: 15, marginVertical: 10 }}>
           {MINIMUM_INVESTMENTS.name}
         </Text>
         <View
@@ -40,14 +41,7 @@ class AmountChooser extends Component {
             }}
           >
             {minInvestments.map((item, index) => {
-              return (
-                <Text
-                  key={index}
-                  style={{ color: "white", textAlign: "center" }}
-                >
-                  {item.name}
-                </Text>
-              );
+              return <Text key={index}>{item.name}</Text>;
             })}
           </View>
         </View>

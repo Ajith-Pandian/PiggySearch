@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { TabNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
-import { TabNavigator } from "react-navigation";
-import { PRIMARY, PINK, BG_COLOR } from "../Constants";
-import Button from "../Components/Button";
+import { Text, Button } from "../Components";
 import BasicFilters from "./BasicFilters";
 import AdvanceFilters from "./AdvanceFilters";
+import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 import { fetchResult, resetFilters } from "../Store/Actions/FillerActions";
 
 const FilterTabs = TabNavigator(

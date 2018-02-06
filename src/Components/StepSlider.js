@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import { StyleSheet, View } from "react-native";
+import Slider from "react-native-slider";
+
+import Text from "./Text";
 
 import { PINK, PINK_DARK } from "../Constants";
-import Slider from "react-native-slider";
 
 const MIN = 0,
   MAX = 100;
@@ -21,7 +22,6 @@ export default class StepSlider extends Component {
     let value = getStepValue(startStep, steps);
     this.state = { value };
   }
-
   componentWillReceiveProps(nextProps) {
     let { startStep, steps } = nextProps;
     let value = getStepValue(startStep, steps);

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
+
+import { CheckBox } from "../Components";
+
 import { PRIMARY, PINK, BG_COLOR, RISKS } from "../Constants";
-import CheckBox from "../Components/CheckBox";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
 class RiskChooser extends Component {

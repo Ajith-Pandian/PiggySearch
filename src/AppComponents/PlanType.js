@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import { PRIMARY, PINK, BG_COLOR, PLAN_TYPES } from "../Constants";
 
-import CheckBox from "../Components/CheckBox";
-import RoundedButton from "../Components/RoundedButton";
-import RadioGroup from "../Components/RadioGroup";
+import { Text, CheckBox, RoundedButton, RadioGroup } from "../Components";
 
 import { changePlanFilter } from "../Store/Actions/FillerActions";
 

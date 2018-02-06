@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 
+import Text from "./Text";
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";
 
 const Button = ({ text, onPress, style, textStyle, isBottom }) => {
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={0.6}
       onPress={() => onPress()}
       style={[
         {

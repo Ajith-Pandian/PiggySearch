@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 
 import { Text, StepSlider } from "../Components";
 
 import { arrayToObject } from "../Utils";
 import { PRIMARY, MINIMUM_INVESTMENTS } from "../Constants";
+import { sSectionHeader, sSectionItems } from "../Styles";
 import { changeAmountFilter } from "../Store/Actions/FillerActions";
 
 class AmountChooser extends Component {
@@ -13,19 +14,11 @@ class AmountChooser extends Component {
     let { minInvestments, _changeAmountFilter } = this.props;
     const steps = minInvestments.length;
     let startStep = minInvestments.findIndex(item => item.active);
+    let { sCompContainer, sTextContainer } = styles;
     return (
       <View>
-        <Text style={{ marginHorizontal: 15, marginVertical: 10 }}>
-          {MINIMUM_INVESTMENTS.name}
-        </Text>
-        <View
-          style={{
-            height: 80,
-            backgroundColor: PRIMARY,
-            marginHorizontal: 10,
-            padding: 10
-          }}
-        >
+        <Text style={sSectionHeader}>{MINIMUM_INVESTMENTS.name}</Text>
+        <View style={[sSectionItems, sCompContainer]}>
           <StepSlider
             steps={steps}
             startStep={startStep}
@@ -33,13 +26,7 @@ class AmountChooser extends Component {
               _changeAmountFilter(minInvestments[val].name, true);
             }}
           />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingHorizontal: 10
-            }}
-          >
+          <View style={sTextContainer}>
             {minInvestments.map((item, index) => {
               return <Text key={index}>{item.name}</Text>;
             })}
@@ -49,15 +36,28 @@ class AmountChooser extends Component {
     );
   }
 }
+
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filters, isResultsVisible } = FilterReducer;
+  let { filters } = FilterReducer;
   return {
-    minInvestments: filters[MINIMUM_INVESTMENTS.name],
-    isResultsVisible
+    minInvestments: filters[MINIMUM_INVESTMENTS.name]
   };
 };
+
 const mapDispatchToProps = (dispatch, props) => ({
   _changeAmountFilter: (childName, isActive) =>
     dispatch(changeAmountFilter(childName, isActive))
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(AmountChooser);
+
+const styles = StyleSheet.create({
+  sCompContainer: {
+    height: 80
+  },
+  sTextContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10
+  }
+});

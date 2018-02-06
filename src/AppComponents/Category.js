@@ -5,26 +5,23 @@ import { connect } from "react-redux";
 import { Text, RoundedButton } from "../Components";
 
 import { PRIMARY, CATEGORIES } from "../Constants";
+import { sSectionHeader, sSectionItems } from "../Styles";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
 class Category extends Component {
   render() {
     let { categories, _changeFilter } = this.props;
     return (
-      <View style={{}}>
-        <Text
-          style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
-        >
-          {CATEGORIES.name}
-        </Text>
+      <View>
+        <Text style={sSectionHeader}>{CATEGORIES.name}</Text>
         <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            padding: 10,
-            marginHorizontal: 10,
-            backgroundColor: PRIMARY
-          }}
+          style={[
+            sSectionItems,
+            {
+              flexDirection: "row",
+              flexWrap: "wrap"
+            }
+          ]}
         >
           {categories.map((item, index) => {
             const { name, active } = item;

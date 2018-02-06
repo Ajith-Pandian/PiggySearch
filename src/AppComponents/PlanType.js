@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
-import { PRIMARY, PINK, BG_COLOR, PLAN_TYPES } from "../Constants";
 
 import { Text, CheckBox, RoundedButton, RadioGroup } from "../Components";
 
+import { PRIMARY, PINK, BG_COLOR, PLAN_TYPES } from "../Constants";
+import { sSectionHeader, sSectionItems } from "../Styles";
 import { changePlanFilter } from "../Store/Actions/FillerActions";
 
 class PlanType extends Component {
   render() {
     let { planTypes, _changePlanFilter } = this.props;
     return (
-      <View style={{}}>
-        <Text
-          style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
-        >
-          {PLAN_TYPES.name}
-        </Text>
+      <View>
+        <Text style={sSectionHeader}>{PLAN_TYPES.name}</Text>
         <RadioGroup
           style={{
             backgroundColor: PRIMARY,
-            marginHorizontal: 10,
             paddingVertical: 5
           }}
           values={planTypes}
@@ -32,8 +28,8 @@ class PlanType extends Component {
 }
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filters, isResultsVisible } = FilterReducer;
-  return { planTypes: filters[PLAN_TYPES.name], isResultsVisible };
+  let { filters } = FilterReducer;
+  return { planTypes: filters[PLAN_TYPES.name] };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changePlanFilter: (childName, isActive) =>

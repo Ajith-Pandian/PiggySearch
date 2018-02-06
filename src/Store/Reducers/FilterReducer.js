@@ -21,14 +21,7 @@ import {
   FUND_HOUSES
 } from "../../Constants";
 
-const addActiveToArray = arr => arr.map(item => ({ ...item, active: false }));
-
-const addActiveToArrayAndChild = arr =>
-  arr.map(item => ({
-    ...item,
-    children: addActiveToArray(item.children),
-    active: false
-  }));
+import { addActiveToArray, addActiveToArrayAndChild } from "../StoreUtils";
 
 const filters = {
   [RISKS.name]: addActiveToArray(RISKS.children),

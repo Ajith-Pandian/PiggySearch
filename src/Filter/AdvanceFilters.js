@@ -12,9 +12,7 @@ class AdvanceFilter extends Component {
     let { fundHouses, _changeFilter } = this.props;
     return (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
-        <Text
-          style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
-        >
+        <Text style={{ marginHorizontal: 5, marginVertical: 10 }}>
           {FUND_HOUSES.name}
         </Text>
         {fundHouses.map((item, index) => {

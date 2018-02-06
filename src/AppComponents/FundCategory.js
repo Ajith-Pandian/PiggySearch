@@ -1,23 +1,21 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
 import { connect } from "react-redux";
 
 import { Text, CheckBox, RoundedButton } from "../Components";
 
 import { PRIMARY, PINK, BG_COLOR, CATEGORIES } from "../Constants";
+import { sSectionHeader, sSectionItems } from "../Styles";
+
 import { changeSubFilter } from "../Store/Actions/FillerActions";
 
 class FundCategory extends Component {
   render() {
     let { subCategories, _changeSubFilter } = this.props;
     return (
-      <View style={{}}>
-        <Text
-          style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
-        >
-          Fund Category
-        </Text>
+      <View>
+        <Text style={sSectionHeader}>Fund Category</Text>
         <Accordion
           sections={subCategories}
           touchableComponent={TouchableOpacity}
@@ -29,11 +27,7 @@ class FundCategory extends Component {
                 isChecked={active}
                 text={name}
                 disabled={true}
-                style={{
-                  height: 50,
-                  marginHorizontal: 10
-                }}
-                onChange={() => {}}
+                style={{ height: 50 }}
               />
             );
           }}
@@ -69,21 +63,13 @@ class FundCategory extends Component {
 }
 
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filters, isResultsVisible } = FilterReducer;
-  return { subCategories: filters[CATEGORIES.name], isResultsVisible };
+  let { filters } = FilterReducer;
+  return { subCategories: filters[CATEGORIES.name] };
 };
+
 const mapDispatchToProps = (dispatch, props) => ({
   _changeSubFilter: (parentName, childName, isActive) =>
     dispatch(changeSubFilter(parentName, childName, isActive))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(FundCategory);
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    backgroundColor: PRIMARY,
-    marginHorizontal: 10
-  }
-});
+export default connect(mapStateToProps, mapDispatchToProps)(FundCategory);

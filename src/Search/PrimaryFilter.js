@@ -7,7 +7,14 @@ import { Amount, Category } from "../AppComponents";
 const PrimaryFilter = ({ onSearchPress }) => {
   return (
     <View style={{}}>
-      <View style={{ flex: 1, justifyContent: "center", marginVertical: 40 }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          marginVertical: 40,
+          marginHorizontal: 10
+        }}
+      >
         <Amount />
         <Category />
       </View>
@@ -16,7 +23,7 @@ const PrimaryFilter = ({ onSearchPress }) => {
         style={{
           position: "absolute",
           bottom: 0,
-          width: "98%"
+          width: "100%"
         }}
         onPress={() => onSearchPress()}
       />

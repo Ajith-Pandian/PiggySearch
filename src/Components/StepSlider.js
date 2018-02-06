@@ -60,7 +60,7 @@ export default class StepSlider extends Component {
           value={value}
           minimumValue={MIN}
           maximumValue={MAX}
-          minimumTrackTintColor={PINK}
+          minimumTrackTintColor={"white"}
           maximumTrackTintColor={PINK_DARK}
           thumbTintColor={PINK}
           style={{ width: "100%" }}

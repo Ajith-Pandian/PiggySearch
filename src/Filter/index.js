@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { TabNavigator } from "react-navigation";
 import { connect } from "react-redux";
 
@@ -16,7 +16,6 @@ const FilterTabs = TabNavigator(
   },
   {
     tabBarOptions: {
-      labelStyle: {},
       style: {
         backgroundColor: PRIMARY
       },
@@ -26,6 +25,7 @@ const FilterTabs = TabNavigator(
     }
   }
 );
+
 class FilterPage extends Component {
   render() {
     let { _fetchResult, navigation } = this.props;
@@ -42,7 +42,7 @@ class FilterPage extends Component {
           style={{
             position: "absolute",
             bottom: 0,
-            width: "98%"
+            width: "100%"
           }}
           textStyle={{}}
           onPress={() => {
@@ -54,16 +54,20 @@ class FilterPage extends Component {
     );
   }
 }
-const ResetButton = ({ dispatch }) => (
+const ResetButton = ({ dispatch, navigation }) => (
   <Button
     text={"RESET"}
     style={{ backgroundColor: "transparent", marginHorizontal: 10 }}
     textStyle={{ color: PINK }}
-    onPress={() => dispatch(resetFilters())}
+    onPress={() => {
+      dispatch(resetFilters());
+      navigation.goBack();
+    }}
   />
 );
 const Reset = connect()(ResetButton);
-FilterPage.navigationOptions = {
+
+FilterPage.navigationOptions = ({ navigation }) => ({
   title: "Filters",
   headerTintColor: "white",
   headerStyle: {
@@ -75,28 +79,16 @@ FilterPage.navigationOptions = {
     shadowRadius: 0,
     elevation: 0
   },
+  headerRight: <Reset navigation={navigation} />
+});
 
-  headerRight: <Reset />
-};
 const mapStateToProps = ({ FilterReducer }) => {
   let { filters } = FilterReducer;
   return { filters };
 };
+
 const mapDispatchToProps = (dispatch, props) => ({
   _fetchResult: filters => dispatch(fetchResult())
 });
-export default connect(mapStateToProps, mapDispatchToProps)(FilterPage);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  }
-});
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPage);

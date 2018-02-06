@@ -8,7 +8,7 @@ import { Risks, FundCategory, Amount, PlanType } from "../AppComponents";
 export default class BasicFilter extends Component {
   render() {
     return (
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.sContainer}>
         <PlanType />
         <Risks />
         <Amount />
@@ -19,7 +19,8 @@ export default class BasicFilter extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingBottom: 60
+  sContainer: {
+    paddingBottom: 60,
+    marginHorizontal: 10
   }
 });

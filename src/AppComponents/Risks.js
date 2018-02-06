@@ -1,22 +1,19 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 
-import { CheckBox } from "../Components";
+import { Text, CheckBox } from "../Components";
 
 import { PRIMARY, PINK, BG_COLOR, RISKS } from "../Constants";
+import { sSectionHeader } from "../Styles";
 import { changeFilter } from "../Store/Actions/FillerActions";
 
 class RiskChooser extends Component {
   render() {
     let { risks, _changeFilter } = this.props;
     return (
-      <View style={{}}>
-        <Text
-          style={{ color: "white", marginHorizontal: 15, marginVertical: 10 }}
-        >
-          {RISKS.name}
-        </Text>
+      <View>
+        <Text style={sSectionHeader}>{RISKS.name}</Text>
         <View style={styles.container}>
           {risks.map((item, index) => {
             let { name, active } = item;
@@ -38,8 +35,8 @@ class RiskChooser extends Component {
   }
 }
 const mapStateToProps = ({ FilterReducer }) => {
-  let { filters, isResultsVisible } = FilterReducer;
-  return { risks: filters[RISKS.name], isResultsVisible };
+  let { filters } = FilterReducer;
+  return { risks: filters[RISKS.name] };
 };
 const mapDispatchToProps = (dispatch, props) => ({
   _changeFilter: (filterName, childName, isActive) =>
@@ -52,7 +49,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    backgroundColor: PRIMARY,
-    marginHorizontal: 10
+    backgroundColor: PRIMARY
   }
 });

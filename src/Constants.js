@@ -114,7 +114,7 @@ const ASSET_ALLOCATION = {
 const FUND_OF_FUNDS = { name: "Fund of Funds", value: "fund_of_funds" };
 const MULTIASSET = { name: "MultiAsset", value: "multiasset" };
 const DEBT_ORIENTED_AGGRESSIVE = {
-  name: "Debt_oriented_Aggressive",
+  name: "Debt Oriented Aggressive",
   value: "debt_oriented_aggressive"
 };
 const DEBT_ORIENTED_CONSERVATIVE = {
@@ -239,7 +239,7 @@ const FUND_HOUSE_PARAMS = [
   DSP_BLACKROCK_MUTUAL_FUND
 ];
 export const FUND_HOUSES = {
-  name: "Fund Category",
+  name: "Fund Houses",
   value: "fund_house_names",
   children: FUND_HOUSE_PARAMS
 };

@@ -10,26 +10,32 @@ import {
   FETCH_RESULT_FAILURE,
   CHANGE_RESULTS_VISIBILITY
 } from "../ActionNames";
+
 import ApiHelper from "../../ApiHelper";
-import { getApiFilters } from "../../Utils";
+
+import { getApiFilters } from "../StoreUtils";
+
 export const changeFilter = (filterName, childName, isActive) => dispatch =>
   dispatch(_changeFilter(filterName, childName, isActive));
 
 function _changeFilter(filterName, childName, isActive) {
   return { type: CHANGE_FILTER_STATE, filterName, childName, isActive };
 }
+
 export const changeAmountFilter = (childName, isActive) => dispatch =>
   dispatch(_changeAmountFilter(childName, isActive));
 
 function _changeAmountFilter(childName, isActive) {
   return { type: CHANGE_AMOUNT_FILTER_STATE, childName, isActive };
 }
+
 export const changePlanFilter = (childName, isActive) => dispatch =>
   dispatch(_changePlanFilter(childName, isActive));
 
 function _changePlanFilter(childName, isActive) {
   return { type: CHANGE_PLAN_FILTER_STATE, childName, isActive };
 }
+
 export const changeSubFilter = (parentName, childName, isActive) => dispatch =>
   dispatch(_changeSubFilter(parentName, childName, isActive));
 
@@ -49,6 +55,7 @@ export const changeResultsVisibility = isVisible => dispatch =>
 function _changeResultsVisibility(isVisible) {
   return { type: CHANGE_RESULTS_VISIBILITY, isVisible };
 }
+
 export const changeSearchTerm = searchTerm => dispatch =>
   dispatch(_changeSearchTerm(searchTerm));
 

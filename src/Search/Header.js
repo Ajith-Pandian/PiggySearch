@@ -33,8 +33,10 @@ const Header = ({
         <TouchableOpacity
           onPress={() => _changeResultsVisibility(false)}
           style={{
-            marginHorizontal: 20,
-            marginVertical: 10
+            marginLeft: 20,
+            marginVertical: 10,
+            alignItems: "center",
+            justifyContent: "center"
           }}
         >
           <Text style={{ color: "white" }}>BACK</Text>

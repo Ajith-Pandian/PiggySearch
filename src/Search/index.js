@@ -18,14 +18,14 @@ import Category from "../Components/Category";
 import Results from "./ResultsPage";
 
 import { PRIMARY, PINK, BG_COLOR } from "../Constants";
-import { changeFilter } from "../Store/Actions/FillerActions";
+import { changeFilter, fetchResult } from "../Store/Actions/FillerActions";
 
 const { height: DEVICE_HEIGHT } = Dimensions.get("window");
 
 const PrimaryFilter = ({ onSearchPress }) => {
   return (
-    <View>
-      <View style={{ flex: 1, justifyContent: "center", marginVertical: 60 }}>
+    <View style={{}}>
+      <View style={{ flex: 1, justifyContent: "center", marginVertical: 40 }}>
         <AmountChooser />
         <Category />
       </View>
@@ -43,15 +43,20 @@ const PrimaryFilter = ({ onSearchPress }) => {
 };
 class SearchPage extends Component {
   render() {
-    let { navigation, isResultsVisible, _changeFilter } = this.props;
+    let {
+      navigation,
+      isResultsVisible,
+      _changeFilter,
+      _fetchResult
+    } = this.props;
     return (
       <View style={styles.container}>
         {isResultsVisible ? (
-          <Results />
+          <Results navigation={navigation} />
         ) : (
           <PrimaryFilter
             onSearchPress={() => {
-              navigation.navigate("Filter");
+              _fetchResult();
             }}
           />
         )}
@@ -68,7 +73,8 @@ const mapStateToProps = ({ FilterReducer }) => {
   return { filter, isResultsVisible };
 };
 const mapDispatchToProps = (dispatch, props) => ({
-  _changeFilter: filters => dispatch(changeFilter(filters))
+  _changeFilter: filters => dispatch(changeFilter(filters)),
+  _fetchResult: filters => dispatch(fetchResult())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
 const styles = StyleSheet.create({
